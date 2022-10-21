@@ -1,0 +1,42 @@
+import { Offer } from '../types/offer';
+
+export const offers: Offer[] = [{
+  previewImage: 'img/apartment-01.jpg',
+  isPremium: true,
+  price: 250,
+  title: 'Шиканые апарты с видом на успех',
+  type: 'apartment',
+  isFavorite: true,
+  rating: 3.5,
+  id: 1,
+},
+{
+  previewImage: 'img/room.jpg',
+  isPremium: false,
+  price: 190,
+  title: 'Ничего так квартирка',
+  type: 'room',
+  isFavorite: false,
+  rating: 4.2,
+  id: 2,
+},
+{
+  previewImage: 'img/studio-01.jpg',
+  isPremium: true,
+  price: 300,
+  title: 'Классный домик, только патио не хватает',
+  type: 'house',
+  isFavorite: true,
+  rating: 1.2,
+  id: 3,
+},
+{
+  previewImage: 'img/apartment-02.jpg',
+  isPremium: false,
+  price: 30,
+  title: 'Не отель, ахутель...',
+  type: 'hotel',
+  isFavorite: false,
+  rating: 2.6,
+  id: 4,
+}];
