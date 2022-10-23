@@ -6,7 +6,7 @@ export const enum RateValues {
   Hundred = 100
 }
 
-export const ratingValues = {
+export const RATING_VALUES = {
   OneStar: {
     min: 1,
     max: 1.4
@@ -28,3 +28,9 @@ export const ratingValues = {
     max: 5
   }
 };
+
+export enum AuthStatuses {
+  Auth = 'AUTH',
+  No_Auth = 'NO_AUTH',
+  Uknown = 'UKNOWN'
+}
