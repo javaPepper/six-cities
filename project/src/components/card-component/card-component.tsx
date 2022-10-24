@@ -10,7 +10,7 @@ function CardComponent (props: CardComponentProps) {
   const { id, isFavorite, isPremium, previewImage, price, rating, title, type } = offer;
   return(
     <article className="cities__card place-card" id={id.toString()}>
-      {(isPremium && <div className="place-card__mark"><span>Premium</span></div>) || null}
+      {(isPremium && <div className="place-card__mark"><span>Premium</span></div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="img" />
