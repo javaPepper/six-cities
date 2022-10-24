@@ -1,5 +1,5 @@
 import { Offer } from '../../types/offer';
-import CardComponent from '../cardComponent/cardComponent';
+import CardComponent from '../card-component/card-component';
 
 type OffersListProps = {
   offers: Offer[];

@@ -1,11 +1,11 @@
-import MainPage from '../../pages/main/mainPage';
+import MainPage from '../../pages/main/main-page';
 import { Offer } from '../../types/offer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import FavoritesPage from '../../pages/favorites/favoritesPage';
-import LoginPage from '../../pages/login/loginPage';
-import RoomPage from '../../pages/roomPage/roomPage';
-import NotFoundPage from '../../pages/404/notFoundPage';
-import PrivateRouteComponent from '../privateRoute/privateRouteComponent';
+import FavoritesPage from '../../pages/favorites/favorites-page';
+import LoginPage from '../../pages/login/login-page';
+import RoomPage from '../../pages/room-page/room-page';
+import NotFoundPage from '../../pages/404/not-found-page';
+import PrivateRouteComponent from '../private-route/private-route-component';
 import { AuthStatuses } from '../../const';
 
 type AppProps = {
