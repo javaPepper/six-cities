@@ -27,7 +27,7 @@ function App({offers}: AppProps) {
         />
         <Route
           path={'/favorites'} element={
-            <PrivateRouteComponent authStatuses={AuthStatuses.No_Auth}>
+            <PrivateRouteComponent authStatuses={AuthStatuses.Auth}>
               <FavoritesPage/>
             </PrivateRouteComponent>
           }
