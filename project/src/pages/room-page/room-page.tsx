@@ -1,4 +1,14 @@
-function RoomPage() {
+import { useParams } from 'react-router-dom';
+import { Offer } from '../../types/offer';
+
+type RoomPageProps = {
+  offers: Offer[];
+}
+
+function RoomPage( props: RoomPageProps) {
+  const { offers } = props;
+  const { id } = useParams();
+
   return(
     <div className="page">
       <header className="header">
@@ -33,24 +43,7 @@ function RoomPage() {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {offers.find((offer) => offer.id.toString() === id).images.map((image) => <div className="property__image-wrapper"key={image}><img className="property__image" src={image} alt="img" /></div>)}
             </div>
           </div>
           <div className="property__container container">

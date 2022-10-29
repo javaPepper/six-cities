@@ -12,7 +12,8 @@ type AppProps = {
   offers: Offer[];
 }
 
-function App({offers}: AppProps) {
+function App(props: AppProps) {
+  const { offers} = props;
   return(
     <BrowserRouter>
       <Routes>
@@ -28,12 +29,12 @@ function App({offers}: AppProps) {
         <Route
           path={'/favorites'} element={
             <PrivateRouteComponent authStatuses={AuthStatuses.Auth}>
-              <FavoritesPage/>
+              <FavoritesPage offers={offers}/>
             </PrivateRouteComponent>
           }
         />
         <Route
-          path={'/offer/:id'} element={<RoomPage/>}
+          path={'/offer/:id'} element={<RoomPage offers={offers}/>}
         />
       </Routes>
     </BrowserRouter>
