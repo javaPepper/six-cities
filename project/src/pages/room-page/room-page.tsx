@@ -1,13 +1,19 @@
+import { HTMLAttributes } from 'react';
 import { useParams } from 'react-router-dom';
+import CommentForm from '../../components/comment-form/comment-form';
 import { Offer } from '../../types/offer';
 
 type RoomPageProps = {
   offers: Offer[];
-}
+} & HTMLAttributes<HTMLFormElement>
 
 function RoomPage( props: RoomPageProps) {
-  const { offers } = props;
-  const { id } = useParams();
+  const { offers, onSubmit } = props;
+  const { id } = useParams<{id:string}>();
+  const theOffer = offers.find((offer) => offer.id.toString() === id);
+  if (!theOffer) {
+    return null;
+  }
 
   return(
     <div className="page">
@@ -43,7 +49,7 @@ function RoomPage( props: RoomPageProps) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offers.find((offer) => offer.id.toString() === id).images.map((image) => <div className="property__image-wrapper"key={image}><img className="property__image" src={image} alt="img" /></div>)}
+              {theOffer.images.map((image) => <div className="property__image-wrapper"key={image}><img className="property__image" src={image} alt="img" /></div>)}
             </div>
           </div>
           <div className="property__container container">
@@ -167,7 +173,7 @@ function RoomPage( props: RoomPageProps) {
                     </div>
                   </li>
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
+                <form className="reviews__form form" action="#" method="post" onSubmit={onSubmit}>
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
                     <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} id="5-stars" type="radio" />
@@ -201,7 +207,7 @@ function RoomPage( props: RoomPageProps) {
                       </svg>
                     </label>
                   </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} />
+                  <CommentForm />
                   <div className="reviews__button-wrapper">
                     <p className="reviews__help">
                   To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
