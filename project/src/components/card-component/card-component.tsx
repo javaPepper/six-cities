@@ -1,20 +1,23 @@
 import { Offer } from '../../types/offer';
 import { getRating } from '../../utils/index';
+import { HTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
 
 type CardComponentProps = {
   offer: Offer;
-}
+} & HTMLAttributes<HTMLTitleElement>
 
 function CardComponent (props: CardComponentProps) {
-  const { offer } = props;
+  const { offer, onMouseEnter, onMouseLeave } = props;
   const { id, isFavorite, isPremium, previewImage, price, rating, title, type } = offer;
+
   return(
-    <article className="cities__card place-card" id={id.toString()}>
-      {(isPremium && <div className="place-card__mark"><span>Premium</span></div>)}
+    <article className="cities__card place-card" id={id.toString()} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="img" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -32,7 +35,7 @@ function CardComponent (props: CardComponentProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

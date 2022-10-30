@@ -2,6 +2,11 @@ import { Offer } from '../types/offer';
 
 export const offers: Offer[] = [{
   previewImage: 'img/apartment-01.jpg',
+  images: ['https://11.react.pages.academy/static/hotel/4.jpg',
+    'https://11.react.pages.academy/static/hotel/20.jpg',
+    'https://11.react.pages.academy/static/hotel/12.jpg',
+    'https://11.react.pages.academy/static/hotel/7.jpg',
+    'https://11.react.pages.academy/static/hotel/18.jpg'],
   isPremium: true,
   price: 250,
   title: 'Шиканые апарты с видом на успех',
@@ -12,6 +17,11 @@ export const offers: Offer[] = [{
 },
 {
   previewImage: 'img/room.jpg',
+  images: ['https://11.react.pages.academy/static/hotel/13.jpg',
+    'https://11.react.pages.academy/static/hotel/8.jpg',
+    'https://11.react.pages.academy/static/hotel/2.jpg',
+    'https://11.react.pages.academy/static/hotel/5.jpg',
+    'https://11.react.pages.academy/static/hotel/17.jpg'],
   isPremium: false,
   price: 190,
   title: 'Ничего так квартирка',
@@ -22,6 +32,10 @@ export const offers: Offer[] = [{
 },
 {
   previewImage: 'img/studio-01.jpg',
+  images: ['https://11.react.pages.academy/static/hotel/6.jpg',
+    'https://11.react.pages.academy/static/hotel/15.jpg',
+    'https://11.react.pages.academy/static/hotel/3.jpg',
+    'https://11.react.pages.academy/static/hotel/11.jpg'],
   isPremium: true,
   price: 300,
   title: 'Классный домик, только патио не хватает',
@@ -32,6 +46,12 @@ export const offers: Offer[] = [{
 },
 {
   previewImage: 'img/apartment-02.jpg',
+  images: ['https://11.react.pages.academy/static/hotel/1.jpg',
+    'https://11.react.pages.academy/static/hotel/6.jpg',
+    'https://11.react.pages.academy/static/hotel/4.jpg',
+    'https://11.react.pages.academy/static/hotel/2.jpg',
+    'https://11.react.pages.academy/static/hotel/7.jpg',
+    'https://11.react.pages.academy/static/hotel/12.jpg'],
   isPremium: false,
   price: 30,
   title: 'Не отель, ахутель...',

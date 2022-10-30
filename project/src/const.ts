@@ -34,3 +34,21 @@ export enum AuthStatuses {
   No_Auth = 'NO_AUTH',
   Uknown = 'UKNOWN'
 }
+
+export enum TitleValues {
+  Perfect = 'perfect',
+  Good = 'good',
+  Not_Bad = 'not bad',
+  Badly = 'badly',
+  Terribly = 'terribly'
+}
+
+export const enum InputValues {
+  Five = 5,
+  Four = 4,
+  Three = 3,
+  Two = 2,
+  One = 1
+}
+
+export const INPUTVALUES = [5, 4, 3, 2, 1];
