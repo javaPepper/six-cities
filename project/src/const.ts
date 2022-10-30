@@ -51,4 +51,4 @@ export const enum InputValues {
   One = 1
 }
 
-export const inputValues = [5, 4, 3, 2, 1];
+export const INPUTVALUES = [5, 4, 3, 2, 1];

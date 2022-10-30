@@ -1,4 +1,4 @@
-import { RATING_VALUES, RateValues, InputValues } from '../const';
+import { RATING_VALUES, RateValues, InputValues, TitleValues } from '../const';
 
 export const getRating = (value: number) => {
   switch(true) {
@@ -20,14 +20,16 @@ export const getRating = (value: number) => {
 export const setRating = (value: number) => {
   switch(true) {
     case value === InputValues.Five:
-      return value;
+      return TitleValues.Perfect;
     case value === InputValues.Four:
-      return value;
+      return TitleValues.Good;
     case value === InputValues.Three:
-      return value;
+      return TitleValues.Not_Bad;
     case value === InputValues.Two:
-      return value;
+      return TitleValues.Badly;
     case value === InputValues.One:
-      return value;
+      return TitleValues.Terribly;
+    default:
+      return 0;
   }
 };

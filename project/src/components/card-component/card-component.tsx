@@ -8,11 +8,11 @@ type CardComponentProps = {
 } & HTMLAttributes<HTMLTitleElement>
 
 function CardComponent (props: CardComponentProps) {
-  const { offer, onMouseEnter } = props;
+  const { offer, onMouseEnter, onMouseLeave } = props;
   const { id, isFavorite, isPremium, previewImage, price, rating, title, type } = offer;
 
   return(
-    <article className="cities__card place-card" id={id.toString()} onMouseEnter={onMouseEnter}>
+    <article className="cities__card place-card" id={id.toString()} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>

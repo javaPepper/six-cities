@@ -7,11 +7,12 @@ type OffersListProps = {
 }
 
 function OffersList({offers}: OffersListProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ activeCard, setActiveCard ] = useState(0);
 
   return(
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <CardComponent offer={offer} key={offer.id} onMouseEnter={() => setActiveCard(offer.id)}/>)}
+      {offers.map((offer) => <CardComponent offer={offer} key={offer.id} onMouseEnter={() => setActiveCard(offer.id)} onMouseLeave={() => setActiveCard(0)}/>)}
     </div>
   );
 }
