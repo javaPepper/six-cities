@@ -1,4 +1,4 @@
-import { RATING_VALUES, RateValues } from '../const';
+import { RATING_VALUES, RateValues, InputValues } from '../const';
 
 export const getRating = (value: number) => {
   switch(true) {
@@ -14,5 +14,20 @@ export const getRating = (value: number) => {
       return RateValues.Hundred;
     default:
       return 0;
+  }
+};
+
+export const setRating = (value: number) => {
+  switch(true) {
+    case value === InputValues.Five:
+      return value;
+    case value === InputValues.Four:
+      return value;
+    case value === InputValues.Three:
+      return value;
+    case value === InputValues.Two:
+      return value;
+    case value === InputValues.One:
+      return value;
   }
 };

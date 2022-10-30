@@ -8,5 +8,5 @@ price: number;
 rating: number;
 title: string;
 type: string;
-
 };
+
