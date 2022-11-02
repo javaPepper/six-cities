@@ -1,23 +1,20 @@
 import { useState } from 'react';
-// import { INPUTVALUES } from '../../const';
-// import RatingComponent from '../rating-component/rating-component';
+import { INPUTVALUES } from '../../const';
+import RatingComponent from '../rating-component/rating-component';
 
 function CommentForm() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ formData, setFormData ] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ ratingValue, setRatingValue ] = useState(0);
+  //const [ ratingValue, setRatingValue ] = useState(0);
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      {/* {INPUTVALUES.map((number) => (<RatingComponent rateValue={number} key={number}
-        onChange={(evt) => {
-          const { value } = evt.currentTarget;
-          setRatingValue(+value);
-        }}
-      />)) */}
-      <div className="reviews__rating-form form__rating" >
+      <div className="reviews__rating-form form__rating">
+        {INPUTVALUES.map((number) => (<RatingComponent rateValue={number} key={number}/>))}
+      </div>
+      {/* <div className="reviews__rating-form form__rating" >
         <input className="form__rating-input visually-hidden" name="rating" defaultValue={5} id="5-stars" type="radio"
           onChange={(evt) => {
             const { value } = evt.currentTarget;
@@ -73,7 +70,7 @@ function CommentForm() {
             <use xlinkHref="#icon-star" />
           </svg>
         </label>
-      </div>
+      </div> */}
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''}
         onChange={(evt) => {
           const { value } = evt.currentTarget;

@@ -1,20 +1,25 @@
 import { setRating } from '../../utils';
-import { HTMLAttributes } from 'react';
+import { useState } from 'react';
 
 type RatingComponentProps = {
   rateValue: number;
-} & HTMLAttributes<HTMLDivElement>
+}
 
 function RatingComponent(props: RatingComponentProps) {
-  const { rateValue, onChange } = props;
+  const { rateValue } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [ ratingValue, setRatingValue ] = useState(0);
 
   return(
-    <div className="reviews__rating-form form__rating">
+    <>
       <input className="form__rating-input visually-hidden" name="rating" defaultValue={rateValue} id={`${rateValue}-stars`} type="radio"
-        onChange={onChange}
+        onChange={(evt) => {
+          const { value } = evt.currentTarget;
+          setRatingValue(+value);
+        }}
       />
       <label htmlFor={`${rateValue}-stars`} className="reviews__rating-label form__rating-label" title={`${setRating(rateValue)}`}><svg className="form__star-image" width={37} height={33}><use xlinkHref="#icon-star" /></svg></label>
-    </div>
+    </>
   );
 }
 

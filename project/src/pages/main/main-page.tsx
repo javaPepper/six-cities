@@ -1,5 +1,6 @@
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
+import Map from '../../components/map-component/map-component';
 
 type MainPageProps = {
   offers: Offer[];
@@ -99,7 +100,9 @@ function MainPage({offers}: MainPageProps) {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map/>
+              </section>
             </div>
           </div>
         </div>
