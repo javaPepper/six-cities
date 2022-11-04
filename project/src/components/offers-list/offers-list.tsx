@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import CardComponent from '../card-component/card-component';
 
 type OffersListProps = {
   offers: Offer[];
+  setActiveCard: (id: number) => void;
 }
 
-function OffersList({offers}: OffersListProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ activeCard, setActiveCard ] = useState(0);
+function OffersList(props: OffersListProps) {
+  const { offers, setActiveCard} = props;
 
   return(
     <div className="cities__places-list places__list tabs__content">

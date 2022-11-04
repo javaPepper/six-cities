@@ -23,8 +23,8 @@ export const offers: Offer[] = [{
   rating: 3.5,
   id: 1,
   location: {
-    latitude: 52.3809553943508,
-    longitude:  4.939309666406198,
+    latitude: 52.37854,
+    longitude:  4.894976,
     zoom: 16
   },
 },
@@ -51,8 +51,8 @@ export const offers: Offer[] = [{
   rating: 4.2,
   id: 2,
   location: {
-    latitude: 52.3909553943508,
-    longitude: 4.929309666406198,
+    latitude: 52.36354,
+    longitude: 4.911976,
     zoom: 16
   },
 },
@@ -78,8 +78,8 @@ export const offers: Offer[] = [{
   rating: 1.2,
   id: 3,
   location: {
-    latitude: 52.3609553943508,
-    longitude: 4.85309666406198,
+    latitude: 52.37454,
+    longitude: 4.881976,
     zoom: 16
   },
 },
@@ -107,8 +107,8 @@ export const offers: Offer[] = [{
   rating: 2.6,
   id: 4,
   location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
+    latitude: 52.38554,
+    longitude: 4.902976,
     zoom: 16
   },
 }];

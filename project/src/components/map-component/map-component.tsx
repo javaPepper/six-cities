@@ -7,6 +7,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapComponentProps = {
   offers: Offer[];
+  activeCard: number;
 }
 
 const defaultCustomIcon = new Icon({
@@ -21,7 +22,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function MapComponent({offers}: MapComponentProps) {
+function MapComponent({offers, activeCard}: MapComponentProps) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam')!;
   const mapRef = useRef(null);
@@ -31,17 +32,19 @@ function MapComponent({offers}: MapComponentProps) {
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.city.location.latitude,
-          lng: offer.city.location.longitude,
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
         marker
           .setIcon(
-            // здесь нужно использовать состояние
+            activeCard !== undefined && offer.id === activeCard
+              ? currentCustomIcon
+              : defaultCustomIcon
           )
           .addTo(map);
       });
     }
-  }, [map, offers]);
+  }, [map, activeCard, offers]);
 
   return(
     <div
