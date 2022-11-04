@@ -2,24 +2,22 @@ import { useState, useEffect, useRef, MutableRefObject } from 'react';
 import { Offer } from '../types/offer';
 import { Map, TileLayer } from 'leaflet';
 
-type UseMapProps = {
-  offers: Offer[];
+type useMapProps = {
+  city: Offer['city'];
 }
 
-function useMap({offers}: UseMapProps, mapRef: MutableRefObject<HTMLElement | null>, city: Offer['city']): Map | null {
+function useMap( mapRef: MutableRefObject<HTMLElement | null>, {city}: useMapProps): Map | null {
   const [ map, setMap ] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
-  const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam');
-
   useEffect(() => {
-    if(mapRef.current !== null && !isRenderedRef.current) {
+    if(mapRef.current !== null && !isRenderedRef.current && city !== undefined) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: amsterdamCity?.location.latitude,
-          lng: amsterdamCity?.location.longitude,
+          lat: city.location.latitude,
+          lng: city.location.longitude,
         },
-        zoom: amsterdamCity?.location.zoom,
+        zoom: city.location.zoom,
       });
 
       const layer = new TileLayer(

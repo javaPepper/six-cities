@@ -12,8 +12,7 @@ type AppProps = {
   offers: Offer[];
 }
 
-function App(props: AppProps) {
-  const { offers} = props;
+function App({offers}: AppProps) {
   return(
     <BrowserRouter>
       <Routes>
