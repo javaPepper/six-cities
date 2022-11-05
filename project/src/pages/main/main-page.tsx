@@ -1,11 +1,15 @@
+import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
+import { useState } from 'react';
 
 type MainPageProps = {
   offers: Offer[];
 }
 
-function MainPage({offers}: MainPageProps) {
+function MainPage({offers}: MainPageProps, ) {
+  const [ activeCard, setActiveCard ] = useState(0);
+
   return(
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,11 +99,13 @@ function MainPage({offers}: MainPageProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers}/>
+                <OffersList offers={offers} setActiveCard={setActiveCard} />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <MapComponent offers={offers} activeCard={activeCard}/>
+              </section>
             </div>
           </div>
         </div>
