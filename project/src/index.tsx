@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { comments } from './mock/comments';
+import { nearbyOffers } from './mock/nearby-offers';
 import { offers } from './mock/offers';
 
 
@@ -10,6 +12,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={offers} />
+    <App comments={comments} offers={offers} nearbyOffers={nearbyOffers} />
   </React.StrictMode>,
 );

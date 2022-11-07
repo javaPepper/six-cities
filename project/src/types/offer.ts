@@ -1,5 +1,6 @@
 export type Offer = {
-city: {
+  bedrooms: number;
+  city: {
     location: {
     latitude: number;
     longitude: number;
@@ -8,10 +9,19 @@ city: {
     name: string;
     };
 id: number;
+description: string;
+goods: string[];
+host: {
+avatarUrl: string;
+id: number;
+isPro: boolean;
+name: string;
+};
 images: string[];
 isFavorite: boolean;
 isPremium: boolean;
 previewImage: string;
+maxAdults: number;
 price: number;
 rating: number;
 title: string;

@@ -7,12 +7,15 @@ import RoomPage from '../../pages/room-page/room-page';
 import NotFoundPage from '../../pages/404/not-found-page';
 import PrivateRouteComponent from '../private-route/private-route-component';
 import { AuthStatuses } from '../../const';
+import { Comment } from '../../types/comment';
 
 type AppProps = {
   offers: Offer[];
+  comments: Comment[];
+  nearbyOffers: Offer[];
 }
 
-function App({offers}: AppProps) {
+function App({offers, comments, nearbyOffers}: AppProps) {
   return(
     <BrowserRouter>
       <Routes>
@@ -33,7 +36,7 @@ function App({offers}: AppProps) {
           }
         />
         <Route
-          path={'/offer/:id'} element={<RoomPage offers={offers}/>}
+          path={'/offer/:id'} element={<RoomPage comments={comments} offers={offers} nearbyOffers={nearbyOffers}/>}
         />
       </Routes>
     </BrowserRouter>
