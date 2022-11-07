@@ -5,8 +5,6 @@ import RatingComponent from '../rating-component/rating-component';
 function CommentForm() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ formData, setFormData ] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //const [ ratingValue, setRatingValue ] = useState(0);
 
   return (
     <form className="reviews__form form" action="#" method="post">
