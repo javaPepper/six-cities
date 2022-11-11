@@ -23,17 +23,18 @@ function RoomMapComponent({offers, nearbyOffers}: RoomMapComponentProps) {
   const map = useMap(mapRef, amsterdamCity);
 
   useEffect(() => {
-    if(map) {nearbyOffers.forEach((offer) => {
-      const marker = new Marker({
-        lat: offer.location.latitude,
-        lng: offer.location.longitude
+    if(map) {
+      nearbyOffers.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
+        });
+        marker
+          .setIcon(
+            defaultCustomIcon
+          )
+          .addTo(map);
       });
-      marker
-        .setIcon(
-          defaultCustomIcon
-        )
-        .addTo(map);
-    });
     }
   }, [map, nearbyOffers, amsterdamCity]);
 

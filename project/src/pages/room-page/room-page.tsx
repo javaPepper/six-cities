@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
 import ReviewsList from '../../components/reviews/reviews-list';
-import RoomMapComponent from '../../components/room-map-component/room-map-component';
+import MapComponent from '../../components/map-component/map-component';
 import { Comment } from '../../types/comment';
 import { Offer } from '../../types/offer';
 import { getRating } from '../../utils/index';
@@ -125,7 +125,7 @@ function RoomPage( props: RoomPageProps) {
               </section>
             </div>
           </div>
-          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}><RoomMapComponent nearbyOffers={nearbyOffers} offers={offers}/></section>
+          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}><MapComponent nearbyOffers={nearbyOffers} offers={offers} /></section>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -7,7 +7,8 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapComponentProps = {
   offers: Offer[];
-  activeCard: number;
+  activeCard?: number;
+  nearbyOffers: Offer[];
 }
 
 const defaultCustomIcon = new Icon({
@@ -22,7 +23,13 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function MapComponent({offers, activeCard}: MapComponentProps) {
+const enum MapStyle {
+  SixHundred = '600',
+  EightHundred = '800',
+  TwelveHundred = '1200'
+}
+
+function MapComponent({offers, nearbyOffers, activeCard}: MapComponentProps) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam')!;
   const mapRef = useRef(null);
@@ -30,25 +37,39 @@ function MapComponent({offers, activeCard}: MapComponentProps) {
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude,
+      activeCard === undefined ?
+        nearbyOffers.forEach((offer) => {
+          const marker = new Marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude
+          });
+          marker
+            .setIcon(
+              defaultCustomIcon
+            )
+            .addTo(map);
+        }) :
+        offers.forEach((offer) => {
+          const marker = new Marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
+          });
+          marker
+            .setIcon(
+              activeCard !== 0 && offer.id === activeCard
+                ? currentCustomIcon
+                : defaultCustomIcon
+            )
+            .addTo(map);
         });
-        marker
-          .setIcon(
-            activeCard !== undefined && offer.id === activeCard
-              ? currentCustomIcon
-              : defaultCustomIcon
-          )
-          .addTo(map);
-      });
     }
-  }, [map, activeCard, offers]);
+  }, [map, nearbyOffers, activeCard, offers]);
 
   return(
     <div
-      style={{height: '800px'}}
+      style={activeCard === undefined ?
+        {height: `${MapStyle.EightHundred}px`} :
+        {height: `${MapStyle.SixHundred}px`, width: `${MapStyle.TwelveHundred}px`}}
       ref={mapRef}
     >
     </div>
