@@ -8,7 +8,8 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 type MapComponentProps = {
   offers: Offer[];
   activeCard?: number;
-  nearbyOffers: Offer[];
+  height: number;
+  width?: number;
 }
 
 const defaultCustomIcon = new Icon({
@@ -23,13 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-const enum MapStyle {
-  SixHundred = '600',
-  EightHundred = '800',
-  TwelveHundred = '1200'
-}
-
-function MapComponent({offers, nearbyOffers, activeCard}: MapComponentProps) {
+function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam')!;
   const mapRef = useRef(null);
@@ -37,39 +32,25 @@ function MapComponent({offers, nearbyOffers, activeCard}: MapComponentProps) {
 
   useEffect(() => {
     if (map) {
-      activeCard === undefined ?
-        nearbyOffers.forEach((offer) => {
-          const marker = new Marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude
-          });
-          marker
-            .setIcon(
-              defaultCustomIcon
-            )
-            .addTo(map);
-        }) :
-        offers.forEach((offer) => {
-          const marker = new Marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
-          });
-          marker
-            .setIcon(
-              activeCard !== 0 && offer.id === activeCard
-                ? currentCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(map);
+      offers.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
+        marker
+          .setIcon(
+            activeCard !== 0 && offer.id === activeCard
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(map);
+      });
     }
-  }, [map, nearbyOffers, activeCard, offers]);
+  }, [map, activeCard, offers]);
 
   return(
     <div
-      style={activeCard === undefined ?
-        {height: `${MapStyle.EightHundred}px`} :
-        {height: `${MapStyle.SixHundred}px`, width: `${MapStyle.TwelveHundred}px`}}
+      style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}
       ref={mapRef}
     >
     </div>

@@ -2,7 +2,6 @@ import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
 import { useState } from 'react';
-import { nearbyOffers } from '../../mock/nearby-offers';
 
 type MainPageProps = {
   offers: Offer[];
@@ -105,7 +104,7 @@ function MainPage({offers}: MainPageProps, ) {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MapComponent offers={offers} activeCard={activeCard} nearbyOffers={nearbyOffers}/>
+                <MapComponent offers={offers} activeCard={activeCard} height={800}/>
               </section>
             </div>
           </div>
