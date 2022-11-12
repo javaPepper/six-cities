@@ -7,10 +7,10 @@ type ReviewsItemProps = {
 
 function ReviewsItem(props: ReviewsItemProps) {
   const { itemComment } = props;
-  const { date, id, rating, comment, user } = itemComment;
+  const { date, rating, comment, user } = itemComment;
 
   return(
-    <li className="reviews__item" id={id.toString()}>
+    <li className="reviews__item">
       <div className="reviews__user user" id={user.id.toString()}>
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={user.avatarUrl} width={54} height={54} alt="Reviews avatar" />

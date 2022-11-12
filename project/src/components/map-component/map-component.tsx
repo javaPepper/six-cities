@@ -7,7 +7,9 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapComponentProps = {
   offers: Offer[];
-  activeCard: number;
+  activeCard?: number;
+  height: number;
+  width?: number;
 }
 
 const defaultCustomIcon = new Icon({
@@ -22,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function MapComponent({offers, activeCard}: MapComponentProps) {
+function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam')!;
   const mapRef = useRef(null);
@@ -37,7 +39,7 @@ function MapComponent({offers, activeCard}: MapComponentProps) {
         });
         marker
           .setIcon(
-            activeCard !== undefined && offer.id === activeCard
+            activeCard !== 0 && offer.id === activeCard
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -48,7 +50,7 @@ function MapComponent({offers, activeCard}: MapComponentProps) {
 
   return(
     <div
-      style={{height: '800px'}}
+      style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}
       ref={mapRef}
     >
     </div>

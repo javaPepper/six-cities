@@ -104,7 +104,7 @@ function MainPage({offers}: MainPageProps, ) {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MapComponent offers={offers} activeCard={activeCard}/>
+                <MapComponent offers={offers} activeCard={activeCard} height={800}/>
               </section>
             </div>
           </div>
