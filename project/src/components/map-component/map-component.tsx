@@ -14,19 +14,19 @@ type MapComponentProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [30, 30],
+  iconAnchor: [15, 30]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [30, 30],
+  iconAnchor: [15, 30]
 });
 
 function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const amsterdamCity = offers.find((offer) => offer.city.name === 'Amsterdam')!;
+  const amsterdamCity = offers[0]!;
   const mapRef = useRef(null);
   const map = useMap(mapRef, amsterdamCity);
 
@@ -39,7 +39,7 @@ function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
         });
         marker
           .setIcon(
-            activeCard !== 0 && offer.id === activeCard
+            activeCard !== undefined && offer.id === activeCard
               ? currentCustomIcon
               : defaultCustomIcon
           )
