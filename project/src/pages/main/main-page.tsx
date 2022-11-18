@@ -16,7 +16,8 @@ function MainPage({offers}: MainPageProps) {
   const [ activeCard, setActiveCard ] = useState(0);
   const dispatch = useAppDispatch();
   const offersByCity = useAppSelector((state) => state.offers);
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector((state) => state.activeCity);
+
   useEffect(() => {
     dispatch(setOffers(city, offers));
   }, [dispatch, offers, city]);
@@ -64,7 +65,7 @@ function MainPage({offers}: MainPageProps) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in Paris{/*{offersByCity[0].city.name}*/}</b>
+              <b className="places__found">{offersByCity.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>

@@ -3,12 +3,12 @@ import { setCity, setOffers } from './action';
 import { Offer } from '../types/offer';
 
  type initialType = {
-  city: string;
+  activeCity: string;
   offers: Offer[];
  }
 
 const initialState: initialType = {
-  city: '',
+  activeCity: '',
   offers: [],
 };
 
@@ -18,7 +18,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(setCity, (state, action: PayloadAction<string>) => {
-      state.city = action.payload;
+      state.activeCity = action.payload;
     });
 });
 

@@ -1,12 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import useMap from '../../hooks/use-map';
 import { Offer } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 type MapComponentProps = {
-  offers: Offer[];
+  offers?: Offer[];
   activeCard?: number;
   height: number;
   width?: number;
@@ -24,15 +25,20 @@ const currentCustomIcon = new Icon({
   iconAnchor: [15, 30]
 });
 
-function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const amsterdamCity = offers[0]!;
+function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
+  const stateOffers = useAppSelector((state) => state.offers);
+  const [city, setCity] = useState(stateOffers[0]);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, amsterdamCity);
+  const map = useMap(mapRef, city);
 
   useEffect(() => {
+    setCity(stateOffers[2]);
+  }, [stateOffers]);
+
+  useEffect(() => {
+
     if (map) {
-      offers.forEach((offer) => {
+      stateOffers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
@@ -44,10 +50,10 @@ function MapComponent({offers, activeCard, height, width}: MapComponentProps) {
               : defaultCustomIcon
           )
           .addTo(map);
+        map.flyTo({lat: offer.city.location.latitude, lng: offer.city.location.longitude});
       });
     }
-  }, [map, activeCard, offers]);
-
+  }, [map, activeCard, stateOffers]);
   return(
     <div
       style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}
