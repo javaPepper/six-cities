@@ -1,13 +1,8 @@
+import { City } from './city';
+
 export type Offer = {
   bedrooms: number;
-  city: {
-    location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-    };
-    name: string;
-    };
+  city: City;
 id: number;
 description: string;
 goods: string[];

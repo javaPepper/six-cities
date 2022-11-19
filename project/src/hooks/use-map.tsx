@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, MutableRefObject } from 'react';
-import { Offer } from '../types/offer';
+import { City } from '../types/city';
 import { Map, TileLayer } from 'leaflet';
 
 type useMapProps = {
-  city: Offer['city'];
+  city: City;
 }
 
 function useMap( mapRef: MutableRefObject<HTMLElement | null>, {city}: useMapProps): Map | null {
@@ -11,6 +11,7 @@ function useMap( mapRef: MutableRefObject<HTMLElement | null>, {city}: useMapPro
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
+
     if(mapRef.current !== null && !isRenderedRef.current && city !== undefined) {
       const instance = new Map(mapRef.current, {
         center: {

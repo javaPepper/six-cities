@@ -2,13 +2,25 @@ import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
 import { useState } from 'react';
+import CitiesListComponent from '../../components/cities-list/cities-list-component';
+import { CITIES_LIST } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { setOffers } from '../../store/action';
 
 type MainPageProps = {
   offers: Offer[];
 }
 
-function MainPage({offers}: MainPageProps, ) {
+function MainPage({offers}: MainPageProps) {
   const [ activeCard, setActiveCard ] = useState(0);
+  const dispatch = useAppDispatch();
+  const offersByCity = useAppSelector((state) => state.offers);
+  const city = useAppSelector((state) => state.activeCity);
+
+  useEffect(() => {
+    dispatch(setOffers(city, offers));
+  }, [dispatch, offers, city]);
 
   return(
     <div className="page page--gray page--main">
@@ -45,36 +57,7 @@ function MainPage({offers}: MainPageProps, ) {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              <CitiesListComponent citiesList={CITIES_LIST} activeCity={city}/>
             </ul>
           </section>
         </div>
@@ -82,7 +65,7 @@ function MainPage({offers}: MainPageProps, ) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offersByCity.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -99,12 +82,12 @@ function MainPage({offers}: MainPageProps, ) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} setActiveCard={setActiveCard} />
+                <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MapComponent offers={offers} activeCard={activeCard} height={800}/>
+                {offersByCity.length > 0 && <MapComponent offers={offersByCity} activeCard={activeCard} height={800}/>}
               </section>
             </div>
           </div>
