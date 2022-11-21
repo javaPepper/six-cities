@@ -1,4 +1,5 @@
-export const enum RateValues {
+
+export const enum RatingValues {
   Twenty = 20,
   Fourty = 40,
   Sixty = 60,
@@ -51,7 +52,7 @@ export const enum InputValues {
   One = 1
 }
 
-export const INPUTVALUES = [5, 4, 3, 2, 1];
+export const INPUT_VALUES: number[] = [5, 4, 3, 2, 1];
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
@@ -59,4 +60,11 @@ export const URL_MARKER_DEFAULT =
 export const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-export const CITIES_LIST = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const CITIES_LIST: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum SortingValues {
+  Popular = 'Popular',
+  IncPrice = 'Price: low to high',
+  DecPrice = 'Price: high to low',
+  TopRated = 'Top rated first'
+}

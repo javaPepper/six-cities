@@ -4,10 +4,9 @@ import { Offer } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
-import { useAppSelector } from '../../hooks';
 
 type MapComponentProps = {
-  offers?: Offer[];
+  offers: Offer[];
   activeCard?: number;
   height: number;
   width?: number;
@@ -26,19 +25,18 @@ const currentCustomIcon = new Icon({
 });
 
 function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
-  const stateOffers = useAppSelector((state) => state.offers);
-  const [city, setCity] = useState(stateOffers[0]);
+  const [city, setCity] = useState(offers[0]);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    setCity(stateOffers[2]);
-  }, [stateOffers]);
+    setCity(offers[0]);
+  }, [offers]);
 
   useEffect(() => {
 
     if (map) {
-      stateOffers.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
@@ -53,7 +51,7 @@ function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
         map.flyTo({lat: offer.city.location.latitude, lng: offer.city.location.longitude});
       });
     }
-  }, [map, activeCard, stateOffers]);
+  }, [map, activeCard, offers]);
   return(
     <div
       style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}

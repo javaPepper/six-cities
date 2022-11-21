@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { INPUTVALUES } from '../../const';
+import { INPUT_VALUES } from '../../const';
 import RatingComponent from '../rating-component/rating-component';
 
 function CommentForm() {
@@ -10,7 +10,7 @@ function CommentForm() {
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {INPUTVALUES.map((number) => (<RatingComponent rateValue={number} key={number}/>))}
+        {INPUT_VALUES.map((number) => (<RatingComponent rateValue={number} key={number}/>))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''}
         onChange={(evt) => {

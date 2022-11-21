@@ -18,6 +18,7 @@ function RoomPage( props: RoomPageProps) {
   const { offers, comments, nearbyOffers } = props;
   const { id } = useParams<{id:string}>();
   const theOffer = offers.find((offer) => offer.id.toString() === id);
+
   if (!theOffer) {
     return null;
   }

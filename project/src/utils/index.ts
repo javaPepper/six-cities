@@ -1,17 +1,18 @@
-import { RATING_VALUES, RateValues, InputValues, TitleValues } from '../const';
+import { RATING_VALUES, RatingValues, InputValues, TitleValues, SortingValues } from '../const';
+import { Offer } from '../types/offer';
 
 export const getRating = (value: number) => {
   switch(true) {
     case value >= RATING_VALUES.OneStar.min && value <= RATING_VALUES.OneStar.max:
-      return RateValues.Twenty;
+      return RatingValues.Twenty;
     case value >= RATING_VALUES.TwoStars.min && value <= RATING_VALUES.TwoStars.max:
-      return RateValues.Fourty;
+      return RatingValues.Fourty;
     case value >= RATING_VALUES.ThreeStars.min && value <= RATING_VALUES.ThreeStars.max:
-      return RateValues.Sixty;
+      return RatingValues.Sixty;
     case value >= RATING_VALUES.FourStars.min && value <= RATING_VALUES.FourStars.max:
-      return RateValues.Eighty;
+      return RatingValues.Eighty;
     case value >= RATING_VALUES.FiveStars.min && value <= RATING_VALUES.FiveStars.max:
-      return RateValues.Hundred;
+      return RatingValues.Hundred;
     default:
       return 0;
   }
@@ -31,5 +32,25 @@ export const setRating = (value: number) => {
       return TitleValues.Terribly;
     default:
       return 0;
+  }
+};
+
+export const getSortingValues = (offers: Offer[], currentValue: string) => {
+  let values: Offer[] = [];
+
+  switch(true) {
+    case currentValue === SortingValues.IncPrice:
+      values = offers.sort((a, b) => a.price - b.price);
+      return values;
+    case currentValue === SortingValues.DecPrice:
+      values = offers.sort((a, b) => b.price - a.price);
+      return values;
+    case currentValue === SortingValues.TopRated:
+      values = offers.sort((a, b) => a.rating - b.rating);
+      return values;
+    case currentValue === SortingValues.Popular:
+      return offers;
+    default:
+      return offers;
   }
 };

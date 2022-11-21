@@ -7,6 +7,8 @@ import { CITIES_LIST } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { setOffers } from '../../store/action';
+import FilterFormComponent from '../../components/filter-form/filter-form';
+import { getSortingValues } from '../../utils';
 
 type MainPageProps = {
   offers: Offer[];
@@ -15,8 +17,12 @@ type MainPageProps = {
 function MainPage({offers}: MainPageProps) {
   const [ activeCard, setActiveCard ] = useState(0);
   const dispatch = useAppDispatch();
-  const offersByCity = useAppSelector((state) => state.offers);
+  let offersByCity = useAppSelector((state) => state.offers);
+
   const city = useAppSelector((state) => state.activeCity);
+  const currentValue = useAppSelector((state) => state.sortingValue);
+  offersByCity = getSortingValues([...offersByCity], currentValue);
+
 
   useEffect(() => {
     dispatch(setOffers(city, offers));
@@ -66,21 +72,7 @@ function MainPage({offers}: MainPageProps) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersByCity.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-              Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <FilterFormComponent currentValue={currentValue}/>
               <div className="cities__places-list places__list tabs__content">
                 <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
               </div>
