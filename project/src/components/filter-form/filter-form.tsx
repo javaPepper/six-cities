@@ -17,7 +17,7 @@ function FilterFormComponent({currentValue}: FilterFormComponentProps) {
 
   const handleSortingValues = (evt: MouseEvent<HTMLElement>) => {
     evt.preventDefault();
-    const textContent = evt.currentTarget.textContent;
+    const textContent = evt.currentTarget.dataset.value;
 
     if(textContent) {
       dispatch(setSortingValue(textContent));
@@ -33,7 +33,7 @@ function FilterFormComponent({currentValue}: FilterFormComponentProps) {
         </svg>
       </span>
       <ul className={`places__options places__options--custom places__options${isOpened ? '--opened' : ''}`} >
-        {Object.values(SortingValues).map((value) => (<li className={`places__option places__option${currentValue === value ? '--active' : ''}`} key={value} tabIndex={0} onClick={handleSortingValues}>{value}</li>))}
+        {Object.values(SortingValues).map((value) => (<li className={`places__option places__option${currentValue === value ? '--active' : ''}`} data-value={value} key={value} tabIndex={0} onClick={handleSortingValues}>{value}</li>))}
       </ul>
     </form>
   );

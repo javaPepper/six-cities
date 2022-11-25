@@ -1,5 +1,5 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setCity, setOffers, setSortingValue } from './action';
+import { getDataOffers, setCity, setDataOffersLoadingStatus, setOffers, setSortingValue } from './action';
 import { Offer } from '../types/offer';
 import { SortingValues } from '../const';
 
@@ -7,12 +7,14 @@ import { SortingValues } from '../const';
   activeCity: string;
   offers: Offer[];
   sortingValue: string;
+  isDataOffersLoading: boolean;
  }
 
 const initialState: initialType = {
   activeCity: '',
   offers: [],
-  sortingValue: SortingValues.Popular
+  sortingValue: SortingValues.Popular,
+  isDataOffersLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,6 +27,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setSortingValue, (state, action: PayloadAction<string>) => {
       state.sortingValue = action.payload;
+    })
+    .addCase(setDataOffersLoadingStatus, (state, action: PayloadAction<boolean>) => {
+      state.isDataOffersLoading = action.payload;
+    })
+    .addCase(getDataOffers, (state, action: PayloadAction<Offer[]>) => {
+      state.offers = action.payload;
     });
 });
 

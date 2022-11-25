@@ -12,3 +12,11 @@ export const setOffers = createAction('setOffers',
 export const setSortingValue = createAction('setSortingValue',
   (sortingValue: string) => ({payload: sortingValue})
 );
+
+export const getDataOffers = createAction('getDataOffers',
+  (data: Offer[]) => ({payload: data})
+);
+
+export const setDataOffersLoadingStatus = createAction('setDataOffersLoadingStatus',
+  (status: boolean) => ({payload: status})
+);
