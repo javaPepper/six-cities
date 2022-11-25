@@ -1,32 +1,19 @@
 import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
-import { Offer } from '../../types/offer';
 import { useState } from 'react';
 import CitiesListComponent from '../../components/cities-list/cities-list-component';
 import { CITIES_LIST } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useEffect } from 'react';
-import { setOffers } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 import FilterFormComponent from '../../components/filter-form/filter-form';
 import { getSortingValues } from '../../utils';
 
-type MainPageProps = {
-  offers: Offer[];
-}
 
-function MainPage({offers}: MainPageProps) {
+function MainPage() {
   const [ activeCard, setActiveCard ] = useState(0);
-  const dispatch = useAppDispatch();
-  let offersByCity = useAppSelector((state) => state.offers);
-
   const city = useAppSelector((state) => state.activeCity);
+  let offersByCity = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === city));
   const currentValue = useAppSelector((state) => state.sortingValue);
   offersByCity = getSortingValues([...offersByCity], currentValue);
-
-
-  useEffect(() => {
-    dispatch(setOffers(city, offers));
-  }, [dispatch, offers, city]);
 
   return(
     <div className="page page--gray page--main">

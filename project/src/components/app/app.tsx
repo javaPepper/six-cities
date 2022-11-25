@@ -8,6 +8,7 @@ import NotFoundPage from '../../pages/404/not-found-page';
 import PrivateRouteComponent from '../private-route/private-route-component';
 import { AuthStatuses } from '../../const';
 import { Comment } from '../../types/comment';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
 type AppProps = {
   offers: Offer[];
@@ -23,7 +24,11 @@ function App({offers, comments, nearbyOffers}: AppProps) {
           path={'*'} element={<NotFoundPage/>}
         />
         <Route
-          path={'/'} element={<MainPage offers={offers}/>}
+          path={'/'} element={
+            <LoadingPage>
+              <MainPage/>
+            </LoadingPage>
+          }
         />
         <Route
           path={'/login'} element={<LoginPage/>}
