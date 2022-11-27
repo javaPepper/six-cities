@@ -2,13 +2,10 @@ import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
 import { useState } from 'react';
 import CitiesListComponent from '../../components/cities-list/cities-list-component';
-import { AuthStatuses, CITIES_LIST } from '../../const';
+import { CITIES_LIST } from '../../const';
 import { useAppSelector } from '../../hooks';
 import FilterFormComponent from '../../components/filter-form/filter-form';
-import { getSortingValues } from '../../utils';
-import LoginHeader from '../../components/login/login-header';
-import LogoutHeader from '../../components/login/logout-header';
-
+import { getSortingValues, setHeader } from '../../utils';
 
 function MainPage() {
   const [ activeCard, setActiveCard ] = useState(0);
@@ -17,18 +14,6 @@ function MainPage() {
   const currentValue = useAppSelector((state) => state.sortingValue);
   offersByCity = getSortingValues([...offersByCity], currentValue);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
-
-  const setHeader = (authStatus: AuthStatuses ) => {
-    let header: JSX.Element | null = null;
-    if(authStatus === AuthStatuses.Auth) {
-      header = <LoginHeader/>;
-    }
-    else{
-      header = <LogoutHeader/>;
-    }
-    return header;
-  };
-
 
   return(
     <div className="page page--gray page--main">

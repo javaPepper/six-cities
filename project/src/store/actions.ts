@@ -27,4 +27,4 @@ export const setAuthorizationStatus = createAction('setAathorizationStatus',
 );
 
 export const redirectToRoute = createAction('redirectToRoute',
-  (route: string) => ({payload: route}));
+  (route: void) => ({payload: route}));

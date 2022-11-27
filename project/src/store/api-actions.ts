@@ -3,10 +3,11 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setDataOffers, setAuthorizationStatus, setDataOffersLoadingStatus, redirectToRoute } from './action';
+import { setDataOffers, setAuthorizationStatus, setDataOffersLoadingStatus, redirectToRoute } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import broserHistory from '../browser-history';
 
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -49,7 +50,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(ApiRouts.Login, {email, password});
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthStatuses.Auth));
-    dispatch(redirectToRoute('/'));
+    dispatch(redirectToRoute(broserHistory.back()));
   }
 );
 

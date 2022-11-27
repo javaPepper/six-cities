@@ -13,12 +13,11 @@ import HistoryRouterComponent from '../history-route/history-route';
 import broserHistory from '../../browser-history';
 
 type AppProps = {
-  offers: Offer[];
   comments: Comment[];
   nearbyOffers: Offer[];
 }
 
-function App({offers, comments, nearbyOffers}: AppProps) {
+function App({ comments, nearbyOffers}: AppProps) {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
 
   return(

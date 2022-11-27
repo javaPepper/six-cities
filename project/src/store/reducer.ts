@@ -1,5 +1,5 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setDataOffers, setAuthorizationStatus, setCity, setDataOffersLoadingStatus, setOffers, setSortingValue } from './action';
+import { setDataOffers, setAuthorizationStatus, setCity, setDataOffersLoadingStatus, setOffers, setSortingValue } from './actions';
 import { Offer } from '../types/offer';
 import { AuthStatuses, SortingValues } from '../const';
 

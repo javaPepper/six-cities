@@ -19,7 +19,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer/>
-      <App comments={comments} offers={store.getState().offers} nearbyOffers={nearbyOffers} />
+      <App comments={comments} nearbyOffers={nearbyOffers} />
     </Provider>
   </React.StrictMode>,
 );

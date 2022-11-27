@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SortingValues } from '../../const';
-import { setSortingValue } from '../../store/action';
+import { setSortingValue } from '../../store/actions';
 import { useAppDispatch } from '../../hooks';
 
 type FilterFormComponentProps = {
