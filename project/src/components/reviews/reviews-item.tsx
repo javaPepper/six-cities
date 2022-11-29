@@ -5,13 +5,12 @@ type ReviewsItemProps = {
   itemComment: Comment;
 }
 
-function ReviewsItem(props: ReviewsItemProps) {
-  const { itemComment } = props;
+function ReviewsItem({itemComment}: ReviewsItemProps) {
   const { date, rating, comment, user } = itemComment;
 
   return(
     <li className="reviews__item">
-      <div className="reviews__user user" id={user.id.toString()}>
+      <div className="reviews__user user" >
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={user.avatarUrl} width={54} height={54} alt="Reviews avatar" />
         </div>
@@ -29,7 +28,7 @@ function ReviewsItem(props: ReviewsItemProps) {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{date.normalize()}</time>
       </div>
     </li>
 

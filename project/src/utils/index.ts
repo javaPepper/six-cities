@@ -1,8 +1,5 @@
 import { InputValues, TitleValues, SortingValues } from '../const';
 import { Offer } from '../types/offer';
-import { AuthStatuses } from '../const';
-import LoginHeader from '../components/login/logout-header';
-import LogoutHeader from '../components/login/login-header';
 
 const MAX = 5;
 
@@ -43,15 +40,4 @@ export const getSortingValues = (offers: Offer[], currentValue: string) => {
     default:
       return offers;
   }
-};
-
-export const setHeader = (authStatus: AuthStatuses ) => {
-  let header: JSX.Element | null = null;
-  if(authStatus === AuthStatuses.Auth) {
-    header = LoginHeader();
-  }
-  else{
-    header = LogoutHeader();
-  }
-  return header;
 };

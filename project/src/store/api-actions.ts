@@ -3,11 +3,12 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setDataOffers, setAuthorizationStatus, setDataOffersLoadingStatus, redirectToRoute } from './actions';
+import { setDataOffers, setAuthorizationStatus, setDataOffersLoadingStatus, redirectToRoute, setComments, setNearbyOffers } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import broserHistory from '../browser-history';
+import { Comment } from '../types/comment';
 
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -67,3 +68,26 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   }
 );
 
+export const fetchCommentsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchComments',
+  async(id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Comment[]>(ApiRouts.Comments.concat(`/${id}`));
+    dispatch(setComments(data));
+  },
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchNearbyOffers',
+  async(id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(ApiRouts.Offers.concat(`/${id}`).concat('/nearby'));
+    dispatch(setNearbyOffers(data));
+  },
+);

@@ -7,7 +7,6 @@ type ReviewsListProps = {
 
 function ReviewsList({comments}: ReviewsListProps) {
 
-
   return(
     <ul className="reviews__list">
       {comments.map((comment) => <ReviewsItem key={comment.id} itemComment={comment}/>)}

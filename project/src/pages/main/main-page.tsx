@@ -5,7 +5,8 @@ import CitiesListComponent from '../../components/cities-list/cities-list-compon
 import { CITIES_LIST } from '../../const';
 import { useAppSelector } from '../../hooks';
 import FilterFormComponent from '../../components/filter-form/filter-form';
-import { getSortingValues, setHeader } from '../../utils';
+import { getSortingValues } from '../../utils';
+import LoginHeaderComponent from '../../components/login/login-header-component';
 
 function MainPage() {
   const [ activeCard, setActiveCard ] = useState(0);
@@ -14,6 +15,7 @@ function MainPage() {
   const currentValue = useAppSelector((state) => state.sortingValue);
   offersByCity = getSortingValues([...offersByCity], currentValue);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
+
 
   return(
     <div className="page page--gray page--main">
@@ -25,7 +27,7 @@ function MainPage() {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </a>
             </div>
-            {setHeader(isAuthStatus)}
+            <LoginHeaderComponent authStatus={isAuthStatus}/>
           </div>
         </div>
       </header>

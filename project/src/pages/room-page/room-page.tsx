@@ -1,25 +1,24 @@
-import { HTMLAttributes } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
 import ReviewsList from '../../components/reviews/reviews-list';
 import MapComponent from '../../components/map-component/map-component';
-import { Comment } from '../../types/comment';
-import { Offer } from '../../types/offer';
-import { getRating, setHeader } from '../../utils/index';
+import { getRating } from '../../utils/index';
 import { useAppSelector } from '../../hooks';
+import LoginHeaderComponent from '../../components/login/login-header-component';
+import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import { store } from '../../store';
 
-type RoomPageProps = {
-  comments: Comment[];
-  nearbyOffers: Offer[];
-} & HTMLAttributes<HTMLTextAreaElement>
 
-function RoomPage( props: RoomPageProps) {
-  const { comments, nearbyOffers } = props;
+function RoomPage() {
   const { id } = useParams<{id:string}>();
   const offers = useAppSelector((state) => state.offers);
   const theOffer = offers.find((offer) => offer.id.toString() === id);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
+  const comments = useAppSelector((state) => state.comments);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  store.dispatch(fetchCommentsAction(id as string));
+  store.dispatch(fetchNearbyOffersAction(id as string));
 
   if (!theOffer) {
     return null;
@@ -35,7 +34,7 @@ function RoomPage( props: RoomPageProps) {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </a>
             </div>
-            {setHeader(isAuthStatus)}
+            <LoginHeaderComponent authStatus={isAuthStatus}/>
           </div>
         </div>
       </header>
