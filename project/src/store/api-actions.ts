@@ -87,7 +87,9 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
 }>(
   'fetchNearbyOffers',
   async(id, {dispatch, extra: api}) => {
+    dispatch(setDataOffersLoadingStatus(true));
     const {data} = await api.get<Offer[]>(`hotels/${id}/nearby`);
+    dispatch(setDataOffersLoadingStatus(false));
     dispatch(setNearbyOffers(data));
   },
 );

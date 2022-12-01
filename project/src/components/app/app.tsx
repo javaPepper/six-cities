@@ -5,9 +5,9 @@ import LoginPage from '../../pages/login/login-page';
 import RoomPage from '../../pages/room-page/room-page';
 import NotFoundPage from '../../pages/404/not-found-page';
 import PrivateRouteComponent from '../private-route/private-route-component';
-import LoadingPage from '../../pages/loading-page/loading-page';
 import HistoryRouterComponent from '../history-route/history-route';
 import broserHistory from '../../browser-history';
+import Spinner from '../../pages/spinner/spinner';
 
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
         />
         <Route
           path={'/'} element={
-            <LoadingPage>
+            <Spinner>
               <MainPage/>
-            </LoadingPage>
+            </Spinner>
           }
         />
         <Route
@@ -36,7 +36,11 @@ function App() {
           }
         />
         <Route
-          path={'/offer/:id'} element={<RoomPage />}
+          path={'/offer/:id'} element={
+            <Spinner>
+              <RoomPage />
+            </Spinner>
+          }
         />
       </Routes>
     </HistoryRouterComponent>

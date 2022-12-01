@@ -115,7 +115,7 @@ function RoomPage() {
               </section>
             </div>
           </div>
-          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}><MapComponent offers={nearbyOffers} height={600} width={1200} /></section>
+          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}>{nearbyOffers.length > 0 && <MapComponent offers={nearbyOffers} height={600} width={1200} />}</section>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -2,7 +2,7 @@ import { useAppSelector } from '../../hooks';
 import { CSSProperties } from 'react';
 import ClipLoader from 'react-spinners/ScaleLoader';
 
-type LoadingPageProps = {
+type SpinnerProps = {
   children: JSX.Element;
 }
 
@@ -16,7 +16,7 @@ const override: CSSProperties = {
   transform: 'translate(-50%,-50%)'
 };
 
-function LoadingPage({children}: LoadingPageProps) {
+function Spinner({children}: SpinnerProps) {
   const isLoading = useAppSelector((state) => state.isDataOffersLoading);
 
   return(
@@ -27,4 +27,4 @@ function LoadingPage({children}: LoadingPageProps) {
   );
 }
 
-export default LoadingPage;
+export default Spinner;

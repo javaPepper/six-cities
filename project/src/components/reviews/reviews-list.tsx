@@ -13,7 +13,7 @@ function ReviewsList({commentss}: ReviewsListProps) {
 
   useEffect(() => {
     setComments(comments);
-  });
+  }, [comments]);
 
 
   return(
