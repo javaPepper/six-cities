@@ -30,6 +30,6 @@ export const setAuthorizationStatus = createAction('setAathorizationStatus',
 export const redirectToRoute = createAction('redirectToRoute',
   (route: void) => ({payload: route}));
 
-export const setNearbyOffers = createAction('etNearbyOffers',
+export const setNearbyOffers = createAction('setNearbyOffers',
   (nearbyOffers: Offer[]) => ({payload: nearbyOffers})
 );

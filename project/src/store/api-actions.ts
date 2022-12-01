@@ -75,7 +75,7 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
 }>(
   'fetchComments',
   async(id, {dispatch, extra: api}) => {
-    const {data} = await api.get<Comment[]>(ApiRouts.Comments.concat(`/${id}`));
+    const {data} = await api.get<Comment[]>(`hotels/${id}`);
     dispatch(setComments(data));
   },
 );
@@ -87,7 +87,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
 }>(
   'fetchNearbyOffers',
   async(id, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offer[]>(ApiRouts.Offers.concat(`/${id}`).concat('/nearby'));
+    const {data} = await api.get<Offer[]>(`hotels/${id}/nearby`);
     dispatch(setNearbyOffers(data));
   },
 );

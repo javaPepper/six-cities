@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
-import ReviewsList from '../../components/reviews/reviews-list';
+//import ReviewsList from '../../components/reviews/reviews-list';
 import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
 import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
-import { store } from '../../store';
 
 
 function RoomPage() {
@@ -17,8 +17,12 @@ function RoomPage() {
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
   const comments = useAppSelector((state) => state.comments);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  store.dispatch(fetchCommentsAction(id as string));
-  store.dispatch(fetchNearbyOffersAction(id as string));
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCommentsAction(id as string));
+    dispatch(fetchNearbyOffersAction(id as string));
+  }, [dispatch, id]);
 
   if (!theOffer) {
     return null;
@@ -106,7 +110,7 @@ function RoomPage() {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
-                <ReviewsList comments={comments}/>
+                {/* <ReviewsList commentss={comments}/> */}
                 <CommentForm/>
               </section>
             </div>

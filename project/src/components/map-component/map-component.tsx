@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { Icon, Marker } from 'leaflet';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
 type MapComponentProps = {
   offers: Offer[];
@@ -25,13 +26,14 @@ const currentCustomIcon = new Icon({
 });
 
 function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
-  const [city, setCity] = useState(offers[0]);
+  const stateOffers = useAppSelector((state) => state.offers);
+  const [city, setCity] = useState(stateOffers[0]);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    setCity(offers[0]);
-  }, [offers]);
+    setCity(stateOffers[0]);
+  }, [stateOffers]);
 
   useEffect(() => {
 
@@ -48,10 +50,13 @@ function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
               : defaultCustomIcon
           )
           .addTo(map);
+
         map.flyTo({lat: offer.city.location.latitude, lng: offer.city.location.longitude});
+
       });
     }
   }, [map, activeCard, offers]);
+
   return(
     <div
       style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}

@@ -1,15 +1,24 @@
+import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { setComments } from '../../store/actions';
 import { Comment } from '../../types/comment';
 import ReviewsItem from './reviews-item';
 
 type ReviewsListProps = {
-  comments: Comment[];
+  commentss: Comment[];
 }
 
-function ReviewsList({comments}: ReviewsListProps) {
+function ReviewsList({commentss}: ReviewsListProps) {
+  const comments = useAppSelector((state) => state.comments);
+
+  useEffect(() => {
+    setComments(comments);
+  });
+
 
   return(
     <ul className="reviews__list">
-      {comments.map((comment) => <ReviewsItem key={comment.id} itemComment={comment}/>)}
+      {commentss.map((comment) => <ReviewsItem key={comment.id} itemComment={comment}/>)}
     </ul>
   );
 }

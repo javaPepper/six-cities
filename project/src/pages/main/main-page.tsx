@@ -16,7 +16,6 @@ function MainPage() {
   offersByCity = getSortingValues([...offersByCity], currentValue);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
 
-
   return(
     <div className="page page--gray page--main">
       <header className="header">
