@@ -1,8 +1,9 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setDataOffers, setAuthorizationStatus, setCity, setDataOffersLoadingStatus, setComments, setSortingValue, setNearbyOffers } from './actions';
+import { setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus } from './actions';
 import { Offer } from '../types/offer';
 import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
+
 
  type initialType = {
   activeCity: string;
@@ -12,6 +13,8 @@ import { AuthStatuses, SortingValues } from '../const';
   sortingValue: string;
   isDataOffersLoading: boolean;
   authorizationStatus: AuthStatuses;
+  error: boolean;
+  ratingValue: number;
  }
 
 const initialState: initialType = {
@@ -21,12 +24,14 @@ const initialState: initialType = {
   nearbyOffers: [],
   sortingValue: SortingValues.Popular,
   isDataOffersLoading: false,
-  authorizationStatus: AuthStatuses.Uknown,
+  authorizationStatus: AuthStatuses.No_Auth,
+  error: false,
+  ratingValue: 0,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setComments, (state, action: PayloadAction<Comment[]>) => {
+    .addCase(setDataComments, (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
     })
     .addCase(setCity, (state, action: PayloadAction<string>) => {
@@ -44,9 +49,18 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setAuthorizationStatus, (state, action: PayloadAction<AuthStatuses>) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setNearbyOffers, (state, action: PayloadAction<Offer[]>) => {
+    .addCase(setDataNearbyOffers, (state, action: PayloadAction<Offer[]>) => {
       state.nearbyOffers = action.payload;
+    })
+    .addCase(setDataError, (state, action: PayloadAction<boolean>) => {
+      state.error = action.payload;
+    })
+    .addCase(setRatingValue, (state, action: PayloadAction<number>) => {
+      state.ratingValue = action.payload;
     });
+  // .addCase(getErrorValue, (state, action: PayloadAction<boolean>) => {
+  //   state.error = action.payload;
+  // });
 });
 
 export { reducer };

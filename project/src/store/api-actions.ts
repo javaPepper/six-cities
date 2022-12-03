@@ -3,13 +3,13 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setDataOffers, setAuthorizationStatus, setDataOffersLoadingStatus, redirectToRoute, setComments, setNearbyOffers } from './actions';
+import { setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import broserHistory from '../browser-history';
 import { Comment } from '../types/comment';
-
+import { PostData } from '../types/post-data';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -18,10 +18,13 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'fetchOffers',
   async(_arg, {dispatch, extra: api}) => {
-    dispatch(setDataOffersLoadingStatus(true));
-    const {data} = await api.get<Offer[]>(ApiRouts.Offers);
-    dispatch(setDataOffersLoadingStatus(false));
-    dispatch(setDataOffers(data));
+    try {
+      const {data} = await api.get<Offer[]>(ApiRouts.Offers);
+      dispatch(setDataOffers(data));
+    }
+    catch {
+      dispatch(setDataError(true));
+    }
   },
 );
 
@@ -75,8 +78,8 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
 }>(
   'fetchComments',
   async(id, {dispatch, extra: api}) => {
-    const {data} = await api.get<Comment[]>(`hotels/${id}`);
-    dispatch(setComments(data));
+    const {data} = await api.get<Comment[]>(`comments/${id}`);
+    dispatch(setDataComments(data));
   },
 );
 
@@ -87,9 +90,19 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string, {
 }>(
   'fetchNearbyOffers',
   async(id, {dispatch, extra: api}) => {
-    dispatch(setDataOffersLoadingStatus(true));
     const {data} = await api.get<Offer[]>(`hotels/${id}/nearby`);
-    dispatch(setDataOffersLoadingStatus(false));
-    dispatch(setNearbyOffers(data));
+    dispatch(setDataNearbyOffers(data));
   },
+);
+
+export const fetchPostCommentAction = createAsyncThunk<void, PostData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'postComment',
+  async({id, comment, rating}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Comment[]>(`comments/${id}`,{comment, rating});
+    dispatch(setDataComments(data));
+  }
 );

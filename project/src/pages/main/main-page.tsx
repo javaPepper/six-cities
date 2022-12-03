@@ -1,12 +1,14 @@
 import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CitiesListComponent from '../../components/cities-list/cities-list-component';
 import { CITIES_LIST } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import FilterFormComponent from '../../components/filter-form/filter-form';
 import { getSortingValues } from '../../utils';
 import LoginHeaderComponent from '../../components/login/login-header-component';
+import Spinner from '../spinner/spinner';
+import { setDataOffersLoadingStatus } from '../../store/actions';
 
 function MainPage() {
   const [ activeCard, setActiveCard ] = useState(0);
@@ -15,6 +17,12 @@ function MainPage() {
   const currentValue = useAppSelector((state) => state.sortingValue);
   offersByCity = getSortingValues([...offersByCity], currentValue);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
+  const isDataOffersLoading = useAppSelector((state) => state.isDataOffersLoading);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setDataOffersLoadingStatus(true));
+  }, [dispatch]);
 
   return(
     <div className="page page--gray page--main">
@@ -39,23 +47,27 @@ function MainPage() {
             </ul>
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in {city}</b>
-              <FilterFormComponent currentValue={currentValue}/>
-              <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
+        {!isDataOffersLoading ?
+          <Spinner/> :
+          (
+            <div className="cities">
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{offersByCity.length} places to stay in {city}</b>
+                  <FilterFormComponent currentValue={currentValue}/>
+                  <div className="cities__places-list places__list tabs__content">
+                    <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
+                  </div>
+                </section>
+                <div className="cities__right-section">
+                  <section className="cities__map map">
+                    {offersByCity.length > 0 && <MapComponent offers={offersByCity} activeCard={activeCard} height={800}/>}
+                  </section>
+                </div>
               </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                {offersByCity.length > 0 && <MapComponent offers={offersByCity} activeCard={activeCard} height={800}/>}
-              </section>
             </div>
-          </div>
-        </div>
+          )}
       </main>
     </div>
   );

@@ -2,13 +2,15 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
-//import ReviewsList from '../../components/reviews/reviews-list';
+import ReviewsList from '../../components/reviews/reviews-list';
 import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
 import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
-
+import { setDataOffersLoadingStatus } from '../../store/actions';
+import Spinner from '../spinner/spinner';
+import NotFoundPage from '../404/not-found-page';
 
 function RoomPage() {
   const { id } = useParams<{id:string}>();
@@ -17,15 +19,22 @@ function RoomPage() {
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
   const comments = useAppSelector((state) => state.comments);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const isDataOffersLoading = useAppSelector((state) => state.isDataOffersLoading);
+  const isError = useAppSelector((state) => state.error);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id as string));
     dispatch(fetchNearbyOffersAction(id as string));
+    dispatch(setDataOffersLoadingStatus(true));
   }, [dispatch, id]);
 
   if (!theOffer) {
-    return null;
+    return <NotFoundPage/>;
+  }
+
+  if (isError) {
+    return <NotFoundPage/>;
   }
 
   return(
@@ -110,8 +119,10 @@ function RoomPage() {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{comments.length}</span></h2>
-                {/* <ReviewsList commentss={comments}/> */}
-                <CommentForm/>
+                {!isDataOffersLoading ?
+                  <Spinner/> :
+                  comments.length > 0 && <ReviewsList comments={comments}/>}
+                {isAuthStatus && <CommentForm/>}
               </section>
             </div>
           </div>
@@ -125,7 +136,6 @@ function RoomPage() {
         </div>
       </main>
     </div>
-
   );
 }
 

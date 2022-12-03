@@ -7,8 +7,6 @@ import NotFoundPage from '../../pages/404/not-found-page';
 import PrivateRouteComponent from '../private-route/private-route-component';
 import HistoryRouterComponent from '../history-route/history-route';
 import broserHistory from '../../browser-history';
-import Spinner from '../../pages/spinner/spinner';
-
 
 function App() {
 
@@ -16,13 +14,13 @@ function App() {
     <HistoryRouterComponent history={broserHistory}>
       <Routes>
         <Route
-          path={'*'} element={<NotFoundPage/>}
+          path={'*'} element={
+            <NotFoundPage/>
+          }
         />
         <Route
           path={'/'} element={
-            <Spinner>
-              <MainPage/>
-            </Spinner>
+            <MainPage/>
           }
         />
         <Route
@@ -37,9 +35,7 @@ function App() {
         />
         <Route
           path={'/offer/:id'} element={
-            <Spinner>
-              <RoomPage />
-            </Spinner>
+            <RoomPage />
           }
         />
       </Routes>

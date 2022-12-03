@@ -7,7 +7,7 @@ export const setCity = createAction('setCity',
   (city: string) => ({payload: city})
 );
 
-export const setComments = createAction('setComments',
+export const setDataComments = createAction('setDataComments',
   (comments: Comment[]) => ({payload: comments})
 );
 
@@ -17,6 +17,10 @@ export const setSortingValue = createAction('setSortingValue',
 
 export const setDataOffers = createAction('setDataOffers',
   (data: Offer[]) => ({payload: data})
+);
+
+export const setDataError = createAction('setDataError',
+  (data: boolean) => ({payload: data})
 );
 
 export const setDataOffersLoadingStatus = createAction('setDataOffersLoadingStatus',
@@ -30,6 +34,10 @@ export const setAuthorizationStatus = createAction('setAathorizationStatus',
 export const redirectToRoute = createAction('redirectToRoute',
   (route: void) => ({payload: route}));
 
-export const setNearbyOffers = createAction('setNearbyOffers',
+export const setDataNearbyOffers = createAction('setDataNearbyOffers',
   (nearbyOffers: Offer[]) => ({payload: nearbyOffers})
+);
+
+export const setRatingValue = createAction('setRatingValue',
+  (rating: number) => ({payload: rating})
 );
