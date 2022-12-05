@@ -1,12 +1,14 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus } from './actions';
+import { setFavorite, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
 import { Offer } from '../types/offer';
 import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
-
+import { offer } from '../mock/offer';
+import { Favorites } from '../types/favorites';
 
  type initialType = {
   activeCity: string;
+  offer: Offer;
   offers: Offer[];
   comments: Comment[];
   nearbyOffers: Offer[];
@@ -15,11 +17,14 @@ import { AuthStatuses, SortingValues } from '../const';
   authorizationStatus: AuthStatuses;
   error: boolean;
   ratingValue: number;
+  favorites: Favorites[];
+  isFavorite: boolean;
  }
 
 const initialState: initialType = {
   activeCity: '',
   offers: [],
+  offer: offer,
   comments: [],
   nearbyOffers: [],
   sortingValue: SortingValues.Popular,
@@ -27,6 +32,8 @@ const initialState: initialType = {
   authorizationStatus: AuthStatuses.No_Auth,
   error: false,
   ratingValue: 0,
+  favorites: [],
+  isFavorite: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -57,10 +64,16 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setRatingValue, (state, action: PayloadAction<number>) => {
       state.ratingValue = action.payload;
-    });
-  // .addCase(getErrorValue, (state, action: PayloadAction<boolean>) => {
-  //   state.error = action.payload;
-  // });
+    })
+    .addCase(setDataHotel, (state, action: PayloadAction<Offer>) => {
+      state.offer = action.payload;
+    })
+    .addCase(setFavoritesOffers, (state, action: PayloadAction<Favorites[]>) => {
+      state.favorites = action.payload;
+    })
+    .addCase(setFavorite, (state, action:PayloadAction<boolean>) => {
+      state.isFavorite = action.payload;}
+    );
 });
 
 export { reducer };

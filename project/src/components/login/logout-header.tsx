@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import broserHistory from '../../browser-history';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
 function LogoutHeader() {
   const dispatch = useAppDispatch();
+  const favCount = useAppSelector((state) => state.favorites);
 
   return (
     <nav className="header__nav">
@@ -14,7 +15,7 @@ function LogoutHeader() {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-            <span className="header__favorite-count">3</span>
+            <span className="header__favorite-count">{favCount.length}</span>
           </Link>
         </li>
         <li className="header__nav-item" onClick={(evt) => {

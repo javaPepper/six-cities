@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AuthStatuses } from '../const';
 import { Comment } from '../types/comment';
+import { Favorites } from '../types/favorites';
 import { Offer } from '../types/offer';
 
 export const setCity = createAction('setCity',
@@ -40,4 +41,16 @@ export const setDataNearbyOffers = createAction('setDataNearbyOffers',
 
 export const setRatingValue = createAction('setRatingValue',
   (rating: number) => ({payload: rating})
+);
+
+export const setDataHotel = createAction('setDataHotel',
+  (hotel: Offer) => ({payload: hotel})
+);
+
+export const setFavoritesOffers = createAction('setFavorites',
+  (favorites: Favorites[]) => ({payload: favorites})
+);
+
+export const setFavorite = createAction('setFavorite',
+  (favoriteStatus: boolean) => ({payload: favoriteStatus})
 );

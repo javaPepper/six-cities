@@ -12,6 +12,7 @@ import { setDataOffersLoadingStatus } from '../../store/actions';
 
 function MainPage() {
   const [ activeCard, setActiveCard ] = useState(0);
+  const offers = useAppSelector((state) => state.offers);
   const city = useAppSelector((state) => state.activeCity);
   let offersByCity = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === city));
   const currentValue = useAppSelector((state) => state.sortingValue);
@@ -47,27 +48,42 @@ function MainPage() {
             </ul>
           </section>
         </div>
-        {!isDataOffersLoading ?
-          <Spinner/> :
-          (
+        {
+          (offers &&
+            (!isDataOffersLoading ?
+              <Spinner/> :
+              (
+                <div className="cities">
+                  <div className="cities__places-container container">
+                    <section className="cities__places places">
+                      <h2 className="visually-hidden">Places</h2>
+                      <b className="places__found">{offersByCity.length} places to stay in {city}</b>
+                      <FilterFormComponent currentValue={currentValue}/>
+                      <div className="cities__places-list places__list tabs__content">
+                        <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
+                      </div>
+                    </section>
+                    <div className="cities__right-section">
+                      <section className="cities__map map">
+                        {offersByCity.length > 0 && <MapComponent offers={offersByCity} activeCard={activeCard} height={800}/>}
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              )))
+            ||
             <div className="cities">
-              <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offersByCity.length} places to stay in {city}</b>
-                  <FilterFormComponent currentValue={currentValue}/>
-                  <div className="cities__places-list places__list tabs__content">
-                    <OffersList offers={offersByCity} setActiveCard={setActiveCard} />
+              <div className="cities__places-container cities__places-container--empty container">
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
                   </div>
                 </section>
-                <div className="cities__right-section">
-                  <section className="cities__map map">
-                    {offersByCity.length > 0 && <MapComponent offers={offersByCity} activeCard={activeCard} height={800}/>}
-                  </section>
-                </div>
+                <div className="cities__right-section" />
               </div>
             </div>
-          )}
+        }
       </main>
     </div>
   );

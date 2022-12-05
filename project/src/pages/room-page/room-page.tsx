@@ -7,30 +7,29 @@ import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
-import { setDataOffersLoadingStatus } from '../../store/actions';
+import { fetchDataOfferAction } from '../../store/api-actions';
+import { setDataOffersLoadingStatus, setFavorite } from '../../store/actions';
 import Spinner from '../spinner/spinner';
 import NotFoundPage from '../404/not-found-page';
 
 function RoomPage() {
   const { id } = useParams<{id:string}>();
-  const offers = useAppSelector((state) => state.offers);
-  const theOffer = offers.find((offer) => offer.id.toString() === id);
+  const theOffer = useAppSelector((state) => state.offer);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
   const comments = useAppSelector((state) => state.comments);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const isDataOffersLoading = useAppSelector((state) => state.isDataOffersLoading);
   const isError = useAppSelector((state) => state.error);
+  //const isFavorite = useAppSelector((state) => state.favoriteStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCommentsAction(id as string));
-    dispatch(fetchNearbyOffersAction(id as string));
+    dispatch(fetchDataOfferAction(id as string));
     dispatch(setDataOffersLoadingStatus(true));
   }, [dispatch, id]);
 
   if (!theOffer) {
-    return <NotFoundPage/>;
+    return null;
   }
 
   if (isError) {
@@ -63,7 +62,11 @@ function RoomPage() {
               {theOffer.isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{theOffer.title}</h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className="property__bookmark-button button" type="button" onClick={(evt) => {
+                  evt.preventDefault();
+                  dispatch(setFavorite(true));
+                }}
+                >
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>

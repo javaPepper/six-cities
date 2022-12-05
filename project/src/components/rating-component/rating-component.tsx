@@ -4,14 +4,15 @@ import { setRatingValue } from '../../store/actions';
 
 type RatingComponentProps = {
   rateValue: number;
+  checked: boolean;
 }
 
-function RatingComponent({rateValue}: RatingComponentProps) {
+function RatingComponent({rateValue, checked}: RatingComponentProps) {
   const dispatch = useAppDispatch();
 
   return(
     <>
-      <input className="form__rating-input visually-hidden" name="rating" defaultValue={rateValue} id={`${rateValue}-stars`} type="radio"
+      <input className="form__rating-input visually-hidden" checked={checked} name="rating" defaultValue={rateValue} id={`${rateValue}-stars`} type="radio"
         onChange={(evt) => {
           const { value } = evt.currentTarget;
           dispatch(setRatingValue(+value));
