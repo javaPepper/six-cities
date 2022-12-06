@@ -1,4 +1,4 @@
-export type Favorites = {
+export type Favorite = {
   bedrooms: number;
 city: {
 location: {

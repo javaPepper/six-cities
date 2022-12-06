@@ -1,63 +1,41 @@
-import { Offer } from '../types/offer';
+import { Favorite } from '../types/favorite';
 
-export const offer: Offer =
+export const favorite: Favorite =
 {
+  'bedrooms': 3,
   'city': {
-    'name': 'Amsterdam',
     'location': {
-      'latitude': 52.37454,
-      'longitude': 4.897976,
-      'zoom': 13
-    }
+      'latitude': 52.370216,
+      'longitude': 4.895168,
+      'zoom': 10
+    },
+    'name': 'Amsterdam'
   },
-  'previewImage': 'https://11.react.pages.academy/static/hotel/18.jpg',
-  'images': [
-    'https://11.react.pages.academy/static/hotel/4.jpg',
-    'https://11.react.pages.academy/static/hotel/20.jpg',
-    'https://11.react.pages.academy/static/hotel/12.jpg',
-    'https://11.react.pages.academy/static/hotel/7.jpg',
-    'https://11.react.pages.academy/static/hotel/18.jpg',
-    'https://11.react.pages.academy/static/hotel/13.jpg',
-    'https://11.react.pages.academy/static/hotel/8.jpg',
-    'https://11.react.pages.academy/static/hotel/2.jpg',
-    'https://11.react.pages.academy/static/hotel/5.jpg',
-    'https://11.react.pages.academy/static/hotel/17.jpg',
-    'https://11.react.pages.academy/static/hotel/6.jpg',
-    'https://11.react.pages.academy/static/hotel/15.jpg',
-    'https://11.react.pages.academy/static/hotel/3.jpg',
-    'https://11.react.pages.academy/static/hotel/11.jpg'
-  ],
-  'title': 'Loft Studio in the Central Area',
-  'isFavorite': false,
-  'isPremium': false,
-  'rating': 2.6,
-  'type': 'apartment',
-  'bedrooms': 4,
-  'maxAdults': 7,
-  'price': 495,
+  'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   'goods': [
-    'Fridge',
-    'Towels',
-    'Coffee machine',
-    'Air conditioning',
-    'Laptop friendly workspace',
-    'Breakfast',
-    'Baby seat',
-    'Washer',
-    'Washing machine',
-    'Dishwasher'
+    'Heating'
   ],
   'host': {
-    'id': 25,
-    'name': 'Angelina',
+    'avatarUrl': 'img/1.png',
+    'id': 3,
     'isPro': true,
-    'avatarUrl': 'img/avatar-angelina.jpg'
+    'name': 'Angelina'
   },
-  'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+  'id': 1,
+  'images': [
+    'img/1.png'
+  ],
+  'isFavorite': true,
+  'isPremium': false,
   'location': {
-    'latitude': 52.37854,
-    'longitude': 4.894976,
-    'zoom': 16
+    'latitude': 52.35514938496378,
+    'longitude': 4.673877537499948,
+    'zoom': 8
   },
-  'id': 1
+  'maxAdults': 4,
+  'previewImage': 'img/1.png',
+  'price': 120,
+  'rating': 4.8,
+  'title': 'Beautiful & luxurious studio at great location',
+  'type': 'apartment'
 };

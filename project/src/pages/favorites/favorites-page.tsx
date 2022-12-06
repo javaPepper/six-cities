@@ -1,11 +1,20 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FavoritesCityList from '../../components/favorites-city-list/favorites-city';
-import FavoritesComponent from '../../components/favorites-component/favorites-component';
+//import FavoritesComponent from '../../components/favorites-component/favorites-component';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+//import { setFavoritesCity } from '../../store/actions';
 
 function FavoritesPage() {
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
   const favorites = useAppSelector((state) => state.favorites);
+  // const dispatch = useAppDispatch();
+  // const city = useAppSelector((state) => state.offer.city.name);
+
+  // useEffect(() => {
+  //   dispatch(setFavoritesCity(city));
+  // },[dispatch, city]);
 
   return(
     <div className="page">
@@ -13,9 +22,9 @@ function FavoritesPage() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to='/' className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </a>
+              </Link>
             </div>
             <LoginHeaderComponent authStatus={isAuthStatus}/>
           </div>
@@ -27,12 +36,10 @@ function FavoritesPage() {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <li className="favorites__locations-items">
-                  <FavoritesCityList offers={favorites}/>
-                  <div className="favorites__places">
-                    {favorites.map((offer) => <FavoritesComponent offer={offer} key={offer.id}/>)}
-                  </div>
-                </li>
+                <FavoritesCityList />
+                {/* <div className="favorites__places">
+                  {favorites.map((offer) => <FavoritesComponent offer={offer} key={offer.id}/>)}
+                </div> */}
               </ul>
             </section> :
             <section className="favorites favorites--empty">

@@ -1,13 +1,13 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setFavorite, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
+import { setFavLength, setFavoritesCity, setFavorite, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
 import { Offer } from '../types/offer';
 import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
 import { offer } from '../mock/offer';
-import { Favorites } from '../types/favorites';
 
  type initialType = {
   activeCity: string;
+  activeFavCity: string;
   offer: Offer;
   offers: Offer[];
   comments: Comment[];
@@ -17,12 +17,14 @@ import { Favorites } from '../types/favorites';
   authorizationStatus: AuthStatuses;
   error: boolean;
   ratingValue: number;
-  favorites: Favorites[];
+  favorites: Offer[];
   isFavorite: boolean;
+  favoritesLength: number;
  }
 
 const initialState: initialType = {
   activeCity: '',
+  activeFavCity: '',
   offers: [],
   offer: offer,
   comments: [],
@@ -34,6 +36,7 @@ const initialState: initialType = {
   ratingValue: 0,
   favorites: [],
   isFavorite: false,
+  favoritesLength: 0,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -43,6 +46,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCity, (state, action: PayloadAction<string>) => {
       state.activeCity = action.payload;
+    })
+    .addCase(setFavoritesCity, (state, action: PayloadAction<string>) => {
+      state.activeFavCity = action.payload;
     })
     .addCase(setSortingValue, (state, action: PayloadAction<string>) => {
       state.sortingValue = action.payload;
@@ -68,12 +74,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setDataHotel, (state, action: PayloadAction<Offer>) => {
       state.offer = action.payload;
     })
-    .addCase(setFavoritesOffers, (state, action: PayloadAction<Favorites[]>) => {
+    .addCase(setFavoritesOffers, (state, action: PayloadAction<Offer[]>) => {
       state.favorites = action.payload;
     })
     .addCase(setFavorite, (state, action:PayloadAction<boolean>) => {
       state.isFavorite = action.payload;}
-    );
+    )
+    .addCase(setFavLength, (state, action: PayloadAction<number>) => {
+      state.favoritesLength = action.payload;
+    });
 });
 
 export { reducer };

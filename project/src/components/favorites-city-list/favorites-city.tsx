@@ -1,13 +1,22 @@
-import { Offer } from '../../types/offer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import FavoritesComponent from '../../components/favorites-component/favorites-component';
+import { useEffect } from 'react';
+//import { setFavoritesCity } from '../../store/actions';
 
-type FavoritesCityListProps = {
-  offers: Offer[];
-}
+function FavoritesCityList() {
+  const favorites = useAppSelector((state) => state.favorites);
+  const dispatch = useAppDispatch();
+  const stateCity = useAppSelector((state) => state.offer.city.name);
 
-function FavoritesCityList({offers}: FavoritesCityListProps) {
+  // useEffect(() => {
+  //   dispatch(setFavoritesCity(stateCity));
+  // },[dispatch, stateCity]);
+
   return(
     <>
-      {offers.map((offer) => <div className="favorites__locations locations locations--current" key={offer.id}><div className="locations__item" ><a className="locations__item-link" href="#"><span>{offer.city.name}</span></a></div></div>)}
+      {
+        (favorites.map((offer) => (<li className="favorites__locations-items" key={offer.id}><div className="favorites__locations locations locations--current" ><div className="locations__item" ><a className="locations__item-link" href="#"><span>{offer.city.name}</span></a> </div></div><div className="favorites__places"> <FavoritesComponent offer={offer} /></div></li>)))
+      }
     </>
   );
 }

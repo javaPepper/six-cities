@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
@@ -7,10 +7,11 @@ import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { fetchDataOfferAction } from '../../store/api-actions';
-import { setDataOffersLoadingStatus, setFavorite } from '../../store/actions';
+import { fetchDataOfferAction, fetchPostFavOffers } from '../../store/api-actions';
+import { setDataOffersLoadingStatus, setFavoritesCity} from '../../store/actions';
 import Spinner from '../spinner/spinner';
 import NotFoundPage from '../404/not-found-page';
+import { setFavLength } from '../../store/actions';
 
 function RoomPage() {
   const { id } = useParams<{id:string}>();
@@ -20,7 +21,7 @@ function RoomPage() {
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const isDataOffersLoading = useAppSelector((state) => state.isDataOffersLoading);
   const isError = useAppSelector((state) => state.error);
-  //const isFavorite = useAppSelector((state) => state.favoriteStatus);
+  const favCount = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -42,9 +43,9 @@ function RoomPage() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to='/' className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </a>
+              </Link>
             </div>
             <LoginHeaderComponent authStatus={isAuthStatus}/>
           </div>
@@ -64,7 +65,10 @@ function RoomPage() {
                 <h1 className="property__name">{theOffer.title}</h1>
                 <button className="property__bookmark-button button" type="button" onClick={(evt) => {
                   evt.preventDefault();
-                  dispatch(setFavorite(true));
+                  dispatch(fetchPostFavOffers(theOffer));
+                  dispatch(setFavoritesCity(theOffer.city.name));
+                  //dispatch(setFavLength(favCount));
+                  console.log(favCount);
                 }}
                 >
                   <svg className="property__bookmark-icon" width={31} height={33}>

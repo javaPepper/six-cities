@@ -3,14 +3,14 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers, setDataHotel, setFavoritesOffers } from './actions';
+import { setFavLength, setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers, setDataHotel, setFavoritesOffers } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import broserHistory from '../browser-history';
 import { Comment } from '../types/comment';
 import { PostData } from '../types/post-data';
-import { Favorites } from '../types/favorites';
+import { Favorite } from '../types/favorite';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -100,21 +100,22 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
 }>(
   'fetchFavorites',
   async(_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Favorites[]>('/favorite');
+    const {data} = await api.get<Favorite[]>('/favorite');
     dispatch(setFavoritesOffers(data));
   },
 );
 
-export const fetchPostOffers = createAsyncThunk<void, Favorites, {
+export const fetchPostFavOffers = createAsyncThunk<void, Offer, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'postFavorites',
   async({id, isFavorite}, {dispatch, extra: api}) => {
-    const status = isFavorite ? 1 : 0;
-    const {data} = await api.post<Favorites[]>(`favorite/${id}/${status}`);
+    const status = isFavorite ? 0 : 1;
+    const {data} = await api.post<Offer[]>(`/favorite/${id}/${status}`);
     dispatch(setFavoritesOffers(data));
+    dispatch(setFavLength(data.length));
   },
 );
 
