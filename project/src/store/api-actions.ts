@@ -3,11 +3,10 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setFavLength, setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers, setDataHotel, setFavoritesOffers } from './actions';
+import { setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers, setDataHotel, setFavoritesOffers } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
-import broserHistory from '../browser-history';
 import { Comment } from '../types/comment';
 import { PostData } from '../types/post-data';
 import { Favorite } from '../types/favorite';
@@ -40,7 +39,7 @@ export const fetchDataOfferAction = createAsyncThunk<void, string, {
       const {data: offer} = await api.get<Offer>(`hotels/${id}`);
       dispatch(setDataHotel(offer));
       const {data: comment} = await api.get<Comment[]>(`comments/${id}`);
-      dispatch(setDataComments(comment));
+      dispatch(setDataComments(comment.slice(0, 10)));
       const {data: nearbyOffers} = await api.get<Offer[]>(`hotels/${id}/nearby`);
       dispatch(setDataNearbyOffers(nearbyOffers));
     }
@@ -76,7 +75,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(ApiRouts.Login, {email, password});
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthStatuses.Auth));
-    dispatch(redirectToRoute(broserHistory.back()));
+    dispatch(redirectToRoute('/'));
   }
 );
 
@@ -111,11 +110,24 @@ export const fetchPostFavOffers = createAsyncThunk<void, Offer, {
   extra: AxiosInstance;
 }>(
   'postFavorites',
-  async({id, isFavorite}, {dispatch, extra: api}) => {
+  async({id, isFavorite}, {dispatch, extra: api, getState}) => {
     const status = isFavorite ? 0 : 1;
-    const {data} = await api.post<Offer[]>(`/favorite/${id}/${status}`);
-    dispatch(setFavoritesOffers(data));
-    dispatch(setFavLength(data.length));
+    if(getState().authorizationStatus === AuthStatuses.No_Auth) {
+      dispatch(redirectToRoute('/login'));
+      return;
+    }
+    const {data} = await api.post<Offer>(`/favorite/${id}/${status}`);
+
+    if(data.isFavorite) {
+      dispatch(setFavoritesOffers([...getState().favorites, data]));
+    }
+    else {
+      dispatch(setFavoritesOffers(getState().favorites.filter((offer) => offer.id !== data.id)));
+    }
+    dispatch(setDataOffers(getState().offers.map((offer) => offer.id === data.id ? data : offer)));
+    if (getState().offer.id === data.id) {
+      dispatch(setDataHotel(data));
+    }
   },
 );
 
@@ -127,6 +139,6 @@ export const fetchPostCommentAction = createAsyncThunk<void, PostData, {
   'postComment',
   async({id, comment, rating}, {dispatch, extra: api}) => {
     const {data} = await api.post<Comment[]>(`comments/${id}`,{comment, rating});
-    dispatch(setDataComments(data));
+    dispatch(setDataComments(data.slice(0, 10)));
   }
 );

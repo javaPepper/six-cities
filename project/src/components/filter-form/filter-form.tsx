@@ -16,7 +16,6 @@ function FilterFormComponent({currentValue}: FilterFormComponentProps) {
   };
 
   const handleSortingValues = (value: string) => {
-
     if(value) {
       dispatch(setSortingValue(value));
     }

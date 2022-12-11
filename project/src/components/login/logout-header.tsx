@@ -2,16 +2,10 @@ import { Link } from 'react-router-dom';
 import broserHistory from '../../browser-history';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
-import { useEffect } from 'react';
-import { setFavLength } from '../../store/actions';
 
 function LogoutHeader() {
   const dispatch = useAppDispatch();
   const favCount = useAppSelector((state) => state.favorites.length);
-
-  useEffect(() => {
-    dispatch(setFavLength(favCount));
-  },[dispatch, favCount]);
 
   return (
     <nav className="header__nav">

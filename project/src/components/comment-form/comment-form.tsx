@@ -6,7 +6,7 @@ import { fetchPostCommentAction } from '../../store/api-actions';
 import RatingComponent from '../rating-component/rating-component';
 import { setRatingValue } from '../../store/actions';
 
-function CommentForm() {
+function CommentsForm() {
   const formDataRef = useRef<null | HTMLTextAreaElement>(null);
   const ratingValue = useAppSelector((state) => state.ratingValue);
   const { id } = useParams<{id:string}>();
@@ -45,4 +45,4 @@ function CommentForm() {
   );
 }
 
-export default CommentForm;
+export default CommentsForm;

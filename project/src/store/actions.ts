@@ -36,7 +36,7 @@ export const setAuthorizationStatus = createAction('setAathorizationStatus',
 );
 
 export const redirectToRoute = createAction('redirectToRoute',
-  (route: void) => ({payload: route}));
+  (route: string) => ({payload: route}));
 
 export const setDataNearbyOffers = createAction('setDataNearbyOffers',
   (nearbyOffers: Offer[]) => ({payload: nearbyOffers})
@@ -52,10 +52,6 @@ export const setDataHotel = createAction('setDataHotel',
 
 export const setFavoritesOffers = createAction('setFavoritesData',
   (favorites: Offer[]) => ({payload: favorites})
-);
-
-export const setFavorite = createAction('setFavorite',
-  (favoriteStatus: boolean) => ({payload: favoriteStatus})
 );
 
 export const setFavLength = createAction('setFavLength',

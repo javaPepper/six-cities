@@ -1,9 +1,9 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setFavLength, setFavoritesCity, setFavorite, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
+import { setFavLength, setFavoritesCity, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
 import { Offer } from '../types/offer';
 import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
-import { offer } from '../mock/offer';
+import { offer } from './offer/offer';
 
  type initialType = {
   activeCity: string;
@@ -77,9 +77,6 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setFavoritesOffers, (state, action: PayloadAction<Offer[]>) => {
       state.favorites = action.payload;
     })
-    .addCase(setFavorite, (state, action:PayloadAction<boolean>) => {
-      state.isFavorite = action.payload;}
-    )
     .addCase(setFavLength, (state, action: PayloadAction<number>) => {
       state.favoritesLength = action.payload;
     });

@@ -1,20 +1,11 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FavoritesCityList from '../../components/favorites-city-list/favorites-city';
-//import FavoritesComponent from '../../components/favorites-component/favorites-component';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-//import { setFavoritesCity } from '../../store/actions';
+import { useAppSelector } from '../../hooks';
 
 function FavoritesPage() {
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
   const favorites = useAppSelector((state) => state.favorites);
-  // const dispatch = useAppDispatch();
-  // const city = useAppSelector((state) => state.offer.city.name);
-
-  // useEffect(() => {
-  //   dispatch(setFavoritesCity(city));
-  // },[dispatch, city]);
 
   return(
     <div className="page">
@@ -37,9 +28,6 @@ function FavoritesPage() {
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 <FavoritesCityList />
-                {/* <div className="favorites__places">
-                  {favorites.map((offer) => <FavoritesComponent offer={offer} key={offer.id}/>)}
-                </div> */}
               </ul>
             </section> :
             <section className="favorites favorites--empty">

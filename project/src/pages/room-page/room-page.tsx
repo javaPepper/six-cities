@@ -11,7 +11,7 @@ import { fetchDataOfferAction, fetchPostFavOffers } from '../../store/api-action
 import { setDataOffersLoadingStatus, setFavoritesCity} from '../../store/actions';
 import Spinner from '../spinner/spinner';
 import NotFoundPage from '../404/not-found-page';
-import { setFavLength } from '../../store/actions';
+import { AuthStatuses } from '../../const';
 
 function RoomPage() {
   const { id } = useParams<{id:string}>();
@@ -21,7 +21,6 @@ function RoomPage() {
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const isDataOffersLoading = useAppSelector((state) => state.isDataOffersLoading);
   const isError = useAppSelector((state) => state.error);
-  const favCount = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -67,8 +66,6 @@ function RoomPage() {
                   evt.preventDefault();
                   dispatch(fetchPostFavOffers(theOffer));
                   dispatch(setFavoritesCity(theOffer.city.name));
-                  //dispatch(setFavLength(favCount));
-                  console.log(favCount);
                 }}
                 >
                   <svg className="property__bookmark-icon" width={31} height={33}>
@@ -129,7 +126,7 @@ function RoomPage() {
                 {!isDataOffersLoading ?
                   <Spinner/> :
                   comments.length > 0 && <ReviewsList comments={comments}/>}
-                {isAuthStatus && <CommentForm/>}
+                {isAuthStatus === AuthStatuses.Auth && <CommentForm/>}
               </section>
             </div>
           </div>
