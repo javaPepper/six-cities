@@ -1,6 +1,6 @@
+import { Navigate } from 'react-router-dom';
 import { AuthStatuses } from '../../const';
 import { useAppSelector } from '../../hooks';
-import LoginPage from '../../pages/login/login-page';
 
 type PrivateRouteComponentProps = {
   children: JSX.Element;
@@ -12,7 +12,7 @@ function IsAuthStatusComponent({children}: PrivateRouteComponentProps) {
   return(
     authStatus === AuthStatuses.Auth
       ? children
-      : <LoginPage/>
+      : <Navigate to={'/login'}/>
   );
 }
 

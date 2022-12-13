@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import FavoritesCityList from '../../components/favorites-city-list/favorites-city';
+import FavoritesCityList from '../../components/favorites-city-list/favorites-city-list';
 import LoginHeaderComponent from '../../components/login/login-header-component';
 import { useAppSelector } from '../../hooks';
 

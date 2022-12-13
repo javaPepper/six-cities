@@ -1,7 +1,14 @@
 import LoginComponent from '../../components/login/login-component';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import { AuthStatuses } from '../../const';
 
 function LoginPage() {
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  if(authStatus === AuthStatuses.Auth) {
+    return <Navigate to={'/'}/>;
+  }
+
   return(
     <div className="page page--gray page--login">
       <header className="header">

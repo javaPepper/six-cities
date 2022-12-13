@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import FavoritesComponent from '../../components/favorites-component/favorites-component';
+import FavoritesComponent from '../favorites-component/favorites-component';
 
 function FavoritesCityList() {
   const favorites = useAppSelector((state) => state.favorites);

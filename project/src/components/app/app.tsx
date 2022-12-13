@@ -6,6 +6,7 @@ import NotFoundPage from '../../pages/404/not-found-page';
 import IsAuthStatusComponent from '../isAuthStatus/isAuthStatus-component';
 import HistoryRouterComponent from '../history-route/history-route';
 import broserHistory from '../../browser-history';
+import LoginPage from '../../pages/login/login-page';
 
 function App() {
   return(
@@ -23,9 +24,7 @@ function App() {
         />
         <Route
           path={'/login'} element={
-            <IsAuthStatusComponent >
-              <MainPage />
-            </IsAuthStatusComponent>
+            <LoginPage/>
           }
         />
         <Route

@@ -6,9 +6,8 @@ type ReviewsItemProps = {
 }
 
 function ReviewsItem({itemComment}: ReviewsItemProps) {
-  const { rating, comment, user } = itemComment;
-  let { date } = itemComment;
-  date = new Date().toDateString().slice(3, 15);
+  const { rating, comment, user, date } = itemComment;
+  const dateFormated = new Date(date).toDateString().slice(3, 15);
 
   return(
     <li className="reviews__item">
@@ -30,7 +29,7 @@ function ReviewsItem({itemComment}: ReviewsItemProps) {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{dateFormated}</time>
       </div>
     </li>
 

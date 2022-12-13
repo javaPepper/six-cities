@@ -7,7 +7,7 @@ import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { fetchDataOfferAction, fetchPostFavOffers } from '../../store/api-actions';
+import { fetchAllDatas, fetchPostFavOffers } from '../../store/api-actions';
 import { setDataOffersLoadingStatus, setFavoritesCity} from '../../store/actions';
 import Spinner from '../spinner/spinner';
 import NotFoundPage from '../404/not-found-page';
@@ -24,7 +24,7 @@ function RoomPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchDataOfferAction(id as string));
+    dispatch(fetchAllDatas(id as string));
     dispatch(setDataOffersLoadingStatus(true));
   }, [dispatch, id]);
 
@@ -130,7 +130,7 @@ function RoomPage() {
               </section>
             </div>
           </div>
-          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}>{nearbyOffers.length > 0 && <MapComponent offers={nearbyOffers} height={600} width={1200} />}</section>
+          <section className="property__map map" style={{display: 'flex', justifyContent: 'center'}}>{nearbyOffers.length > 0 && <MapComponent offers={nearbyOffers.concat(theOffer)} activeCard={theOffer.id} height={600} width={1200} />}</section>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -28,12 +28,12 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchDataOfferAction = createAsyncThunk<void, string, {
+export const fetchAllDatas = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'fetchDataHotel',
+  'fetchAllDatas',
   async(id, {dispatch, extra: api}) => {
     try {
       const {data: offer} = await api.get<Offer>(`hotels/${id}`);
@@ -57,8 +57,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'checkAuth',
   async(_arg, {dispatch, extra: api}) => {
     try {
-      dispatch(setAuthorizationStatus(AuthStatuses.Auth));
       await api.get<string>(ApiRouts.Login);
+      dispatch(setAuthorizationStatus(AuthStatuses.Auth));
     } catch{
       dispatch(setAuthorizationStatus(AuthStatuses.No_Auth));
     }
