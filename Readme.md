@@ -1,49 +1,36 @@
-# Личный проект «Шесть городов»
+[![GitHub Starts](https://img.shields.io/github/stars/javaPepper/six-cities.svg?style=social&label=Star&maxAge=2592000)](https://github.com/javaPepper/six-cities/stargazers)
+[![GitHub Watches](https://img.shields.io/github/watchers/javaPepper/six-cities.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/javaPepper/six-cities/watchers)
+[![GitHub Forks](https://img.shields.io/github/forks/javaPepper/six-cities.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/javaPepper/goncaloperes/six-cities/network)
 
-* Студент: [Сергей Ананьев](https://up.htmlacademy.ru/react/11/user/1755589).
-* Наставник: `Дина  Абрамова`.
+# Six Cities
+---
+
+### Description
+---
+
+Welcome to Six Cities!
+
+Six Cities is the "pen test" on my way of learning javascript and React. Other words it is the first and educational project that's made under supervision of the mentor.
 
 ---
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`._
+Whereas Six Cities is a educational project this repo consits some logical implementations only. HTML layouts and CSS styles as well as backend portions are delivered "out of the box".
 
+
+### Contributing
 ---
 
-### Памятка
+I'll appreciate and welcome any and all contributions! Here are some ways you can get started:
 
-#### 1. Зарегистрируйтесь на Гитхабе
+1. Report bugs: If you encounter any bugs, please let us know. Open up an issue and let us know the problem.
+2. Contribute code: If you are a developer and want to contribute, follow the instructions below to get started!
+3. Suggestions: If you don't want to code but have some awesome ideas, open up an issue explaining some updates or imporvements you would like to see!
+4. Documentation: If you see the need for some additional documentation, feel free to add some!
 
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
-
-#### 2. Создайте форк
-
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
-
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
-
-Получится вот так:
-
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
-```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
-
+### Instructions
 ---
-
-<a href="https://htmlacademy.ru/intensive/react"><img align="left" width="50" height="50" title="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/react/logo-for-github.png"></a>
-
-Репозиторий создан для обучения на профессиональном онлайн‑курсе «[React. Разработка сложных клиентских приложений](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru).
+1. Fork this repository
+2. Clone the forked repository
+3. Add your contributions (code or documentation)
+4. Commit and push
+5. Wait for pull request to be merged
