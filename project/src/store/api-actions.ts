@@ -36,11 +36,11 @@ export const fetchAllDatas = createAsyncThunk<void, string, {
   'fetchAllDatas',
   async(id, {dispatch, extra: api}) => {
     try {
-      const {data: offer} = await api.get<Offer>(`hotels/${id}`);
+      const {data: offer} = await api.get<Offer>(`offers/${id}`);
       dispatch(setDataHotel(offer));
       const {data: comment} = await api.get<Comment[]>(`comments/${id}`);
       dispatch(setDataComments(comment.slice(0, 10)));
-      const {data: nearbyOffers} = await api.get<Offer[]>(`hotels/${id}/nearby`);
+      const {data: nearbyOffers} = await api.get<Offer[]>(`offers/${id}/nearby`);
       dispatch(setDataNearbyOffers(nearbyOffers));
     }
     catch {

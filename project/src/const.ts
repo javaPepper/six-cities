@@ -38,14 +38,14 @@ export enum SortingValues {
   TopRated = 'Top rated first'
 }
 
-export const BACKEND_URL = 'https://11.react.pages.academy/six-cities';
+export const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
 
 export const REQUES_TIMEOUT = 5000;
 
 export const AUTH_TOKEN_KEY = 'offers-token';
 
 export enum ApiRouts {
-  Offers = '/hotels',
+  Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
   Favorites = '/favorite',
