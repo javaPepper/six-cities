@@ -10,21 +10,26 @@ type MapComponentProps = {
   activeCard?: number;
   height: number;
   width?: number;
-}
+};
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [30, 30],
-  iconAnchor: [15, 30]
+  iconAnchor: [15, 30],
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [30, 30],
-  iconAnchor: [15, 30]
+  iconAnchor: [15, 30],
 });
 
-function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
+function MapComponent({
+  offers,
+  activeCard,
+  height,
+  width,
+}: MapComponentProps) {
   const [city, setCity] = useState(offers[0]);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -34,7 +39,6 @@ function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
   }, [offers]);
 
   useEffect(() => {
-
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -49,18 +53,19 @@ function MapComponent({ offers, activeCard, height, width}: MapComponentProps) {
           )
           .addTo(map);
 
-        map.flyTo({lat: offer.city.location.latitude, lng: offer.city.location.longitude});
-
+        map.flyTo({
+          lat: offer.city.location.latitude,
+          lng: offer.city.location.longitude,
+        });
       });
     }
   }, [map, activeCard, offers]);
 
-  return(
+  return (
     <div
-      style={{height: `${height}px`, width: width ? `${width}px` : 'auto'}}
+      style={{ height: `${height}px`, width: width ? `${width}px` : 'auto' }}
       ref={mapRef}
-    >
-    </div>
+    ></div>
   );
 }
 

@@ -17,9 +17,9 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'fetchOffers',
-  async(_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     try {
-      const {data} = await api.get<Offer[]>(ApiRouts.Offers);
+      const { data } = await api.get<Offer[]>(ApiRouts.Offers);
       dispatch(setDataOffers(data));
     }
     catch {
@@ -34,13 +34,13 @@ export const fetchAllDatas = createAsyncThunk<void, string, {
   extra: AxiosInstance;
 }>(
   'fetchAllDatas',
-  async(id, {dispatch, extra: api}) => {
+  async (id, { dispatch, extra: api }) => {
     try {
-      const {data: offer} = await api.get<Offer>(`offers/${id}`);
+      const { data: offer } = await api.get<Offer>(`offers/${id}`);
       dispatch(setDataHotel(offer));
-      const {data: comment} = await api.get<Comment[]>(`comments/${id}`);
+      const { data: comment } = await api.get<Comment[]>(`comments/${id}`);
       dispatch(setDataComments(comment.slice(0, 10)));
-      const {data: nearbyOffers} = await api.get<Offer[]>(`offers/${id}/nearby`);
+      const { data: nearbyOffers } = await api.get<Offer[]>(`offers/${id}/nearby`);
       dispatch(setDataNearbyOffers(nearbyOffers));
     }
     catch {
@@ -55,11 +55,11 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'checkAuth',
-  async(_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     try {
       await api.get<string>(ApiRouts.Login);
       dispatch(setAuthorizationStatus(AuthStatuses.Auth));
-    } catch{
+    } catch {
       dispatch(setAuthorizationStatus(AuthStatuses.No_Auth));
     }
   },
@@ -71,8 +71,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   extra: AxiosInstance;
 }>(
   'login',
-  async({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(ApiRouts.Login, {email, password});
+  async ({ email, password }, { dispatch, extra: api }) => {
+    const { data: { token } } = await api.post<UserData>(ApiRouts.Login, { email, password });
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthStatuses.Auth));
     dispatch(redirectToRoute('/'));
@@ -85,7 +85,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'logout',
-  async(_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     await api.delete(ApiRouts.Logout);
     dropToken();
     dispatch(setAuthorizationStatus(AuthStatuses.No_Auth));
@@ -98,8 +98,8 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'fetchFavorites',
-  async(_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Favorite[]>('/favorite');
+  async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<Favorite[]>('/favorite');
     dispatch(setFavoritesOffers(data));
   },
 );
@@ -110,15 +110,15 @@ export const fetchPostFavOffers = createAsyncThunk<void, Offer, {
   extra: AxiosInstance;
 }>(
   'postFavorites',
-  async({id, isFavorite}, {dispatch, extra: api, getState}) => {
+  async ({ id, isFavorite }, { dispatch, extra: api, getState }) => {
     const status = isFavorite ? 0 : 1;
-    if(getState().authorizationStatus === AuthStatuses.No_Auth) {
+    if (getState().authorizationStatus === AuthStatuses.No_Auth) {
       dispatch(redirectToRoute('/login'));
       return;
     }
-    const {data} = await api.post<Offer>(`/favorite/${id}/${status}`);
+    const { data } = await api.post<Offer>(`/favorite/${id}/${status}`);
 
-    if(data.isFavorite) {
+    if (data.isFavorite) {
       dispatch(setFavoritesOffers([...getState().favorites, data]));
     }
     else {
@@ -137,8 +137,8 @@ export const fetchPostCommentAction = createAsyncThunk<void, PostData, {
   extra: AxiosInstance;
 }>(
   'postComment',
-  async({id, comment, rating}, {dispatch, extra: api}) => {
-    const {data} = await api.post<Comment[]>(`comments/${id}`,{comment, rating});
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    const { data } = await api.post<Comment[]>(`comments/${id}`, { comment, rating });
     dispatch(setDataComments(data.slice(0, 10)));
   }
 );

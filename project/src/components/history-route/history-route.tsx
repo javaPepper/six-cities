@@ -8,12 +8,19 @@ export interface HistoryRouterComponentProps {
   children?: React.ReactNode;
 }
 
-function HistoryRouterComponent({basename, history, children}: HistoryRouterComponentProps) {
-  const [ state, setState ] = useState({action: history.action, location: history.location});
+function HistoryRouterComponent({
+  basename,
+  history,
+  children,
+}: HistoryRouterComponentProps) {
+  const [state, setState] = useState({
+    action: history.action,
+    location: history.location,
+  });
 
   useLayoutEffect(() => history.listen(setState), [history]);
 
-  return(
+  return (
     <Router
       basename={basename}
       location={state.location}

@@ -6,19 +6,36 @@ import { setCity } from '../../store/actions';
 type CitiesListComponentProps = {
   citiesList: string[];
   activeCity: string;
-}
+};
 
-function CitiesListComponent({citiesList, activeCity}: CitiesListComponentProps) {
+function CitiesListComponent({
+  citiesList,
+  activeCity,
+}: CitiesListComponentProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setCity(citiesList[0]));
   }, [dispatch, citiesList]);
 
-  return(
+  return (
     <>
-      {citiesList.map((city) => <li className="locations__item" key={city} onClick={() => dispatch(setCity(city))}><Link to={''} className={`locations__item-link tabs__item tabs__item ${activeCity === city ? 'tabs__item--active' : ''}`}><span>{city}</span></Link></li>
-      )}
+      {citiesList.map((city) => (
+        <li
+          className="locations__item"
+          key={city}
+          onClick={() => dispatch(setCity(city))}
+        >
+          <Link
+            to={''}
+            className={`locations__item-link tabs__item tabs__item ${
+              activeCity === city ? 'tabs__item--active' : ''
+            }`}
+          >
+            <span>{city}</span>
+          </Link>
+        </li>
+      ))}
     </>
   );
 }

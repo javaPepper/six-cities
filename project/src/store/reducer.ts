@@ -5,7 +5,7 @@ import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
 import { offer } from './offer/offer';
 
- type initialType = {
+type initialType = {
   activeCity: string;
   activeFavCity: string;
   offer: Offer;
@@ -20,7 +20,7 @@ import { offer } from './offer/offer';
   favorites: Offer[];
   isFavorite: boolean;
   favoritesLength: number;
- }
+}
 
 const initialState: initialType = {
   activeCity: '',

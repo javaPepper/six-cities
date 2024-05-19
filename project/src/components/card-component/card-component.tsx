@@ -8,11 +8,20 @@ import { setFavoritesCity } from '../../store/actions';
 
 type CardComponentProps = {
   offer: Offer;
-} & HTMLAttributes<HTMLTitleElement>
+} & HTMLAttributes<HTMLTitleElement>;
 
-function CardComponent (props: CardComponentProps) {
+function CardComponent(props: CardComponentProps) {
   const { offer, onMouseEnter, onMouseLeave, onClick } = props;
-  const { id, isFavorite, isPremium, previewImage, price, rating, title, type } = offer;
+  const {
+    id,
+    isFavorite,
+    isPremium,
+    previewImage,
+    price,
+    rating,
+    title,
+    type,
+  } = offer;
   const dispatch = useAppDispatch();
 
   const handleIsFavorite = () => {
@@ -20,12 +29,27 @@ function CardComponent (props: CardComponentProps) {
     dispatch(setFavoritesCity(offer.city.name));
   };
 
-  return(
-    <article className="cities__card place-card" onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
+  return (
+    <article
+      className="cities__card place-card"
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="img" />
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={260}
+            height={200}
+            alt="img"
+          />
         </Link>
       </div>
       <div className="place-card__info">
@@ -34,11 +58,22 @@ function CardComponent (props: CardComponentProps) {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button place-card__bookmark-button${isFavorite ? '--active button' : ' button'}`} type="button" onClick={handleIsFavorite}><svg className="place-card__bookmark-icon" width={18} height={19}><use xlinkHref="#icon-bookmark" /></svg><span className="visually-hidden">To bookmarks</span></button>
+          <button
+            className={`place-card__bookmark-button place-card__bookmark-button${
+              isFavorite ? '--active button' : ' button'
+            }`}
+            type="button"
+            onClick={handleIsFavorite}
+          >
+            <svg className="place-card__bookmark-icon" width={18} height={19}>
+              <use xlinkHref="#icon-bookmark" />
+            </svg>
+            <span className="visually-hidden">To bookmarks</span>
+          </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${getRating(rating)}%`}} />
+            <span style={{ width: `${getRating(rating)}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

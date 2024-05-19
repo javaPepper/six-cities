@@ -9,36 +9,21 @@ import broserHistory from '../../browser-history';
 import LoginPage from '../../pages/login/login-page';
 
 function App() {
-  return(
+  return (
     <HistoryRouterComponent history={broserHistory}>
       <Routes>
+        <Route path={'*'} element={<NotFoundPage />} />
+        <Route path={'/'} element={<MainPage />} />
+        <Route path={'/login'} element={<LoginPage />} />
         <Route
-          path={'*'} element={
-            <NotFoundPage/>
-          }
-        />
-        <Route
-          path={'/'} element={
-            <MainPage/>
-          }
-        />
-        <Route
-          path={'/login'} element={
-            <LoginPage/>
-          }
-        />
-        <Route
-          path={'/favorites'} element={
-            <IsAuthStatusComponent >
+          path={'/favorites'}
+          element={
+            <IsAuthStatusComponent>
               <FavoritesPage />
             </IsAuthStatusComponent>
           }
         />
-        <Route
-          path={'/offer/:id'} element={
-            <RoomPage />
-          }
-        />
+        <Route path={'/offer/:id'} element={<RoomPage />} />
       </Routes>
     </HistoryRouterComponent>
   );

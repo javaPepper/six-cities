@@ -15,27 +15,26 @@ function FavoritesCityList() {
     }, {})
   );
 
-  return(
+  return (
     <>
-      {
-        groupedOffers.map((group) => (
-          group.map((offer, index) => (
-            <li className="favorites__locations-items" key={offer.id}>
-              <div className="favorites__locations locations locations--current" >
-                {index === 0 && (
-                  <div className="locations__item" >
-                    <a className="locations__item-link" href="#">
-                      <span>{offer.city.name}</span>
-                    </a>
-                  </div>
-                )}
-              </div>
-              <div className="favorites__places"><FavoritesComponent offer={offer} />
-              </div>
-            </li>
-          ))
+      {groupedOffers.map((group) =>
+        group.map((offer, index) => (
+          <li className="favorites__locations-items" key={offer.id}>
+            <div className="favorites__locations locations locations--current">
+              {index === 0 && (
+                <div className="locations__item">
+                  <a className="locations__item-link" href="#">
+                    <span>{offer.city.name}</span>
+                  </a>
+                </div>
+              )}
+            </div>
+            <div className="favorites__places">
+              <FavoritesComponent offer={offer} />
+            </div>
+          </li>
         ))
-      }
+      )}
     </>
   );
 }
