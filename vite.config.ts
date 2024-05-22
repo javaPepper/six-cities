@@ -5,9 +5,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/six-cities',
   plugins: [react()],
-  server: {
-    origin: 'https://javapepper.github.io/six-cities',
-  },
+  
 })

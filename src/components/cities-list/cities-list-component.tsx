@@ -15,8 +15,8 @@ function CitiesListComponent({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setCity(citiesList[0]));
-  }, [dispatch, citiesList]);
+    dispatch(setCity(activeCity));
+  }, [dispatch, citiesList, activeCity]);
 
   return (
     <>
