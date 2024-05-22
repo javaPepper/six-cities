@@ -1,12 +1,13 @@
 import LoginComponent from '../../components/login/login-component';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { AuthStatuses } from '../../const';
+import Header from '../../components/header/header';
 
 function LoginPage() {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
   if (authStatus === AuthStatuses.Auth) {
-    return <Navigate to={'/'} />;
+    return <Navigate to={'/six-cities'} />;
   }
 
   return (
@@ -14,17 +15,7 @@ function LoginPage() {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-            <div className="header__left">
-              <Link to={'/'} className="header__logo-link">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </Link>
-            </div>
+            <Header />
           </div>
         </div>
       </header>

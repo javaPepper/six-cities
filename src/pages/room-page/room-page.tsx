@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommentForm from '../../components/comment-form/comment-form';
 import NearbyOffersList from '../../components/nearby-offers-list/nearby-offers-list';
@@ -15,6 +15,7 @@ import {
 import Spinner from '../spinner/spinner';
 import NotFoundPage from '../404/not-found-page';
 import { AuthStatuses } from '../../const';
+import Header from '../../components/header/header';
 
 function RoomPage() {
   const { id } = useParams<{ id: string }>();
@@ -46,17 +47,7 @@ function RoomPage() {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-            <div className="header__left">
-              <Link to="/" className="header__logo-link">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </Link>
-            </div>
+            <Header />
             <LoginHeaderComponent authStatus={isAuthStatus} />
           </div>
         </div>

@@ -13,7 +13,7 @@ function App() {
     <HistoryRouterComponent history={broserHistory}>
       <Routes>
         <Route path={'*'} element={<NotFoundPage />} />
-        <Route path={'/'} element={<MainPage />} />
+        <Route path={'/six-cities'} element={<MainPage />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route
           path={'/favorites'}
