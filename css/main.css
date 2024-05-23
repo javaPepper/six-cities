@@ -385,8 +385,10 @@ img {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: auto;
+  background: url(../img/logo.svg) no-repeat;
+  min-width: 81px;
+  min-height: 41px;
 }
-
 .header__logo-link {
   margin-bottom: 15px;
 }
@@ -1769,8 +1771,4 @@ img {
   align-items: flex-start;
   padding-top: 48px;
   padding-bottom: 52px;
-}
-.header__logo-link:not(.header__logo-link--active):focus,
-.header__logo-link:not(.header__logo-link--active):hover {
-  opacity: 0.5;
 }
