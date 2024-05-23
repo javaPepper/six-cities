@@ -6,7 +6,7 @@ function Header() {
       <Link to='/six-cities' className='header__logo-link'>
         <img
           className='header__logo'
-          src='img/logo.svg'
+          src='../six-cities/public/img/logo.svg'
           alt='6 cities logo'
           width={81}
           height={41}

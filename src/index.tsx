@@ -11,10 +11,12 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../public/css/main.css';
+import { setCity } from './store/actions';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFavoritesAction());
+store.dispatch(setCity('Paris'));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

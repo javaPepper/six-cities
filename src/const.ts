@@ -24,10 +24,10 @@ export const enum InputValues {
 export const INPUT_VALUES: number[] = [5, 4, 3, 2, 1];
 
 export const URL_MARKER_DEFAULT =
-  'img/pin.svg';
+  '../six-cities/public/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  'img/pin-active.svg';
+  '../six-cities/public/img/pin-active.svg';
 
 export const CITIES_LIST: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 

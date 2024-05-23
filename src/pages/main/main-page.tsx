@@ -27,6 +27,7 @@ function MainPage() {
   );
   const dispatch = useAppDispatch();
 
+
   useEffect(() => {
     dispatch(setDataOffersLoadingStatus(true));
   }, [dispatch]);
@@ -67,7 +68,7 @@ function MainPage() {
                     <OffersList
                       offers={offersByCity}
                       setActiveCard={setActiveCard}
-                    />{' '}
+                    />
                     :
                   </div>
                 </section>

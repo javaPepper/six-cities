@@ -1,9 +1,7 @@
 import { useRef, FormEvent } from "react";
-// import { CITIES_LIST } from "../../const";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { loginAction } from "../../store/api-actions";
 import { AuthData } from "../../types/auth-data";
-// import { setCity } from "../../store/actions";
 import { Link } from "react-router-dom";
 
 function LoginComponent() {
@@ -11,11 +9,6 @@ function LoginComponent() {
   const passRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const city = useAppSelector((state) => state.activeCity);
-  console.log('city', city);
-
-  // useEffect(() => {
-  //   dispatch(setCity(CITIES_LIST[0]));
-  // }, [dispatch]);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
