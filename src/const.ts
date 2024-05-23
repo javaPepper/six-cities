@@ -24,10 +24,10 @@ export const enum InputValues {
 export const INPUT_VALUES: number[] = [5, 4, 3, 2, 1];
 
 export const URL_MARKER_DEFAULT =
-  '../six-cities/public/img/pin.svg';
+  'https://javapepper.github.io/six-cities/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  '../six-cities/public/img/pin-active.svg';
+  'https://javapepper.github.io/six-cities/pin-active.svg';
 
 export const CITIES_LIST: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
