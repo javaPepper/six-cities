@@ -388,6 +388,7 @@ img {
   background: url(../img/logo.svg) no-repeat;
   min-width: 81px;
   min-height: 41px;
+  cursor: pointer;
 }
 .header__logo-link {
   margin-bottom: 15px;
