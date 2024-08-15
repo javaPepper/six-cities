@@ -7,7 +7,7 @@ import MapComponent from '../../components/map-component/map-component';
 import { getRating } from '../../utils/index';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
-import { fetchAllDatas, fetchPostFavOffers } from '../../store/api-actions';
+import { fetchAllData, fetchPostFavOffers } from '../../store/api-actions';
 import {
   setDataOffersLoadingStatus,
   setFavoritesCity,
@@ -30,7 +30,7 @@ function RoomPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllDatas(id as string));
+    dispatch(fetchAllData(id as string));
     dispatch(setDataOffersLoadingStatus(true));
   }, [dispatch, id]);
 
