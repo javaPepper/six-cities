@@ -33,7 +33,7 @@ export const fetchAllData = createAsyncThunk<void, string, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'fetchAllDatas',
+  'fetchAllData',
   async (id, { dispatch, extra: api }) => {
     try {
       const { data: offer } = await api.get<Offer>(`offers/${id}`);
