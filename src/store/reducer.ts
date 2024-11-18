@@ -1,5 +1,5 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
-import { setFavLength, setFavoritesCity, setDataHotel, setRatingValue, setDataOffers, setAuthorizationStatus, setCity, setDataComments, setSortingValue, setDataNearbyOffers, setDataError, setDataOffersLoadingStatus, setFavoritesOffers } from './actions';
+import { setFavLength, setFavoritesCity, setHotel, setRatingValue, setOffers, setAuthorizationStatus, setCity, setAllComments, setSortingValue, setNearbyOffers, setError, setOffersLoadingStatus, setFavoritesOffers, setComment } from './actions';
 import { Offer } from '../types/offer';
 import { Comment } from '../types/comment';
 import { AuthStatuses, SortingValues } from '../const';
@@ -41,8 +41,11 @@ const initialState: initialType = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setDataComments, (state, action: PayloadAction<Comment[]>) => {
+    .addCase(setAllComments, (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
+    })
+    .addCase(setComment, (state, action: PayloadAction<Comment>) => {
+      state.comments.push(action.payload);
     })
     .addCase(setCity, (state, action: PayloadAction<string>) => {
       state.activeCity = action.payload;
@@ -53,25 +56,25 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setSortingValue, (state, action: PayloadAction<string>) => {
       state.sortingValue = action.payload;
     })
-    .addCase(setDataOffersLoadingStatus, (state, action: PayloadAction<boolean>) => {
+    .addCase(setOffersLoadingStatus, (state, action: PayloadAction<boolean>) => {
       state.isDataOffersLoading = action.payload;
     })
-    .addCase(setDataOffers, (state, action: PayloadAction<Offer[]>) => {
+    .addCase(setOffers, (state, action: PayloadAction<Offer[]>) => {
       state.offers = action.payload;
     })
     .addCase(setAuthorizationStatus, (state, action: PayloadAction<AuthStatuses>) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setDataNearbyOffers, (state, action: PayloadAction<Offer[]>) => {
+    .addCase(setNearbyOffers, (state, action: PayloadAction<Offer[]>) => {
       state.nearbyOffers = action.payload;
     })
-    .addCase(setDataError, (state, action: PayloadAction<boolean>) => {
+    .addCase(setError, (state, action: PayloadAction<boolean>) => {
       state.error = action.payload;
     })
     .addCase(setRatingValue, (state, action: PayloadAction<number>) => {
       state.ratingValue = action.payload;
     })
-    .addCase(setDataHotel, (state, action: PayloadAction<Offer>) => {
+    .addCase(setHotel, (state, action: PayloadAction<Offer>) => {
       state.offer = action.payload;
     })
     .addCase(setFavoritesOffers, (state, action: PayloadAction<Offer[]>) => {

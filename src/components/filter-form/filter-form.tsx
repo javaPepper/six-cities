@@ -28,7 +28,7 @@ function FilterFormComponent({ currentValue }: FilterFormComponentProps) {
       method="get"
       onClick={handleOpenedSort}
     >
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0}>
         {currentValue}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -40,7 +40,7 @@ function FilterFormComponent({ currentValue }: FilterFormComponentProps) {
           isOpened ? '--opened' : ''
         }`}
       >
-        {Object.values(SortingValues).map((value) => (
+        {Object.keys(SortingValues).map((value) => (
           <li
             className={`places__option places__option${
               currentValue === value ? '--active' : ''

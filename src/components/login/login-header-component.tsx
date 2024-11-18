@@ -9,7 +9,7 @@ type LoginHeaderComponentProps = {
 function LoginHeaderComponent({ authStatus }: LoginHeaderComponentProps) {
   let header: JSX.Element | null = null;
 
-  if (authStatus === AuthStatuses.Auth) {
+  if (authStatus === AuthStatuses.Auth as string) {
     header = <LoginHeader />;
   } else {
     header = <LogoutHeader />;

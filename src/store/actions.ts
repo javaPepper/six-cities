@@ -11,23 +11,27 @@ export const setFavoritesCity = createAction('setFavoriteCity',
   (city: string) => ({ payload: city })
 );
 
-export const setDataComments = createAction('setDataComments',
+export const setAllComments = createAction('setAllComments',
   (comments: Comment[]) => ({ payload: comments })
+);
+
+export const setComment = createAction('setComment',
+  (comment: Comment) => ({ payload: comment })
 );
 
 export const setSortingValue = createAction('setSortingValue',
   (sortingValue: string) => ({ payload: sortingValue })
 );
 
-export const setDataOffers = createAction('setDataOffers',
+export const setOffers = createAction('setOffers',
   (data: Offer[]) => ({ payload: data })
 );
 
-export const setDataError = createAction('setDataError',
+export const setError = createAction('setError',
   (data: boolean) => ({ payload: data })
 );
 
-export const setDataOffersLoadingStatus = createAction('setDataOffersLoadingStatus',
+export const setOffersLoadingStatus = createAction('setOffersLoadingStatus',
   (status: boolean) => ({ payload: status })
 );
 
@@ -35,10 +39,10 @@ export const setAuthorizationStatus = createAction('setAathorizationStatus',
   (authStatus: AuthStatuses) => ({ payload: authStatus })
 );
 
-export const redirectToRoute = createAction('redirectToRoute',
+export const redirectRoute = createAction('redirectRoute',
   (route: string) => ({ payload: route }));
 
-export const setDataNearbyOffers = createAction('setDataNearbyOffers',
+export const setNearbyOffers = createAction('setNearbyOffers',
   (nearbyOffers: Offer[]) => ({ payload: nearbyOffers })
 );
 
@@ -46,11 +50,11 @@ export const setRatingValue = createAction('setRatingValue',
   (rating: number) => ({ payload: rating })
 );
 
-export const setDataHotel = createAction('setDataHotel',
+export const setHotel = createAction('setHotel',
   (hotel: Offer) => ({ payload: hotel })
 );
 
-export const setFavoritesOffers = createAction('setFavoritesData',
+export const setFavoritesOffers = createAction('setFavoritesOffers',
   (favorites: Offer[]) => ({ payload: favorites })
 );
 

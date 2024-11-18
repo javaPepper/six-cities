@@ -65,7 +65,8 @@ function MapComponent({
     <div
       style={{ height: `${height}px`, width: width ? `${width}px` : 'auto' }}
       ref={mapRef}
-    ></div>
+    >
+    </div>
   );
 }
 

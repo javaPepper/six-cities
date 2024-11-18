@@ -5,8 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchPostCommentAction } from '../../store/api-actions';
 import RatingComponent from '../rating-component/rating-component';
 import { setRatingValue } from '../../store/actions';
+import { PostData } from '../../types/post-data';
 
-function CommentsForm() {
+function CommentsForm () {
   const ratingValue = useAppSelector((state) => state.ratingValue);
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -24,26 +25,35 @@ function CommentsForm() {
     if (!id) {
       return;
     }
-    const postData = { comment: formData, rating: ratingValue, id: id };
-    dispatch(fetchPostCommentAction(postData)).then((result) => {
-      if (result.type !== 'postComment/rejected') {
-        setFormData('');
-      }
-      dispatch(setRatingValue(0));
-    });
+    const postData: PostData = {
+      comment: formData,
+      rating: ratingValue,
+      id
+    };
+    dispatch(fetchPostCommentAction(postData))
+      .then((result) => {
+        try {
+          if (result.type !== 'fetchPostCommentAction/rejected') {
+            setFormData('');
+            dispatch(setRatingValue(0));
+          }
+        } catch {
+          throw new Error('Oops! Something went wrong... Working on it...');
+        }
+      });
   };
 
   return (
     <form
-      className="reviews__form form"
-      action="#"
-      method="post"
+      className='reviews__form form'
+      action='#'
+      method='post'
       onSubmit={handleOnSubmit}
     >
-      <label className="reviews__label form__label" htmlFor="review">
+      <label className='reviews__label form__label' htmlFor='review'>
         Your review
       </label>
-      <div className="reviews__rating-form form__rating">
+      <div className='reviews__rating-form form__rating'>
         {INPUT_VALUES.map((number) => (
           <RatingComponent
             checked={ratingValue === number}
@@ -54,22 +64,22 @@ function CommentsForm() {
       </div>
       <textarea
         onChange={(evt) => setFormData(evt.target.value)}
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
+        className='reviews__textarea form__textarea'
+        id='review'
+        name='review'
+        placeholder='Tell how was your stay, what you like and what can be improved'
         value={formData}
       />
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set
-          <span className="reviews__star"> rating</span>
+      <div className='reviews__button-wrapper'>
+        <p className='reviews__help'>
+          To submit review please make sure to set&nbsp;
+          <span className='reviews__star'>rating </span>
           and describe your stay with at least
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className='reviews__text-amount'> 50 characters</b>.
         </p>
         <button
-          className="reviews__submit form__submit button"
-          type="submit"
+          className='reviews__submit form__submit button'
+          type='submit'
           disabled={!isValid}
         >
           Submit

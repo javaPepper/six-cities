@@ -8,7 +8,7 @@ import FilterFormComponent from '../../components/filter-form/filter-form';
 import { getSortingValues } from '../../utils';
 import LoginHeaderComponent from '../../components/login/login-header-component';
 import Spinner from '../spinner/spinner';
-import { setDataOffersLoadingStatus } from '../../store/actions';
+import { setOffersLoadingStatus } from '../../store/actions';
 import MainPageEmpty from './main-page-empty';
 import Header from '../../components/header/header';
 
@@ -29,7 +29,7 @@ function MainPage() {
 
 
   useEffect(() => {
-    dispatch(setDataOffersLoadingStatus(true));
+    dispatch(setOffersLoadingStatus(true));
   }, [dispatch]);
 
   return (
@@ -37,7 +37,7 @@ function MainPage() {
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
-           <Header />
+            <Header />
             <LoginHeaderComponent authStatus={isAuthStatus} />
           </div>
         </div>

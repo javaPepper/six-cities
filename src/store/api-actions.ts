@@ -3,7 +3,7 @@ import { ApiRouts, AuthStatuses } from '../const';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { setDataError, setDataOffers, setAuthorizationStatus, redirectToRoute, setDataComments, setDataNearbyOffers, setDataHotel, setFavoritesOffers } from './actions';
+import { setError, setOffers, setAuthorizationStatus, redirectRoute, setAllComments, setNearbyOffers, setHotel, setFavoritesOffers, setComment } from './actions';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
@@ -20,12 +20,11 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     try {
       const { data } = await api.get<Offer[]>(ApiRouts.Offers);
-      dispatch(setDataOffers(data));
+      dispatch(setOffers(data));
+    } catch {
+      dispatch(setError(true));
     }
-    catch {
-      dispatch(setDataError(true));
-    }
-  },
+  }
 );
 
 export const fetchAllData = createAsyncThunk<void, string, {
@@ -36,17 +35,16 @@ export const fetchAllData = createAsyncThunk<void, string, {
   'fetchAllData',
   async (id, { dispatch, extra: api }) => {
     try {
-      const { data: offer } = await api.get<Offer>(`offers/${id}`);
-      dispatch(setDataHotel(offer));
-      const { data: comment } = await api.get<Comment[]>(`comments/${id}`);
-      dispatch(setDataComments(comment.slice(0, 10)));
-      const { data: nearbyOffers } = await api.get<Offer[]>(`offers/${id}/nearby`);
-      dispatch(setDataNearbyOffers(nearbyOffers));
+      const { data: offer } = await api.get<Offer>(`${ApiRouts.Offers}/${id}`);
+      dispatch(setHotel(offer));
+      const { data: comment } = await api.get<Comment[]>(`${ApiRouts.Comments}/${id}`);
+      dispatch(setAllComments(comment.slice(0, 10)));
+      const { data: nearbyOffers } = await api.get<Offer[]>(`${ApiRouts.Offers}/${id}/nearby`);
+      dispatch(setNearbyOffers(nearbyOffers));
+    } catch {
+      dispatch(setError(true));
     }
-    catch {
-      dispatch(setDataError(true));
-    }
-  },
+  }
 );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -62,7 +60,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     } catch {
       dispatch(setAuthorizationStatus(AuthStatuses.No_Auth));
     }
-  },
+  }
 );
 
 export const loginAction = createAsyncThunk<void, AuthData, {
@@ -75,7 +73,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const { data: { token } } = await api.post<UserData>(ApiRouts.Login, { email, password });
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthStatuses.Auth));
-    dispatch(redirectToRoute('/'));
+    dispatch(redirectRoute('/'));
   }
 );
 
@@ -99,9 +97,9 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
 }>(
   'fetchFavorites',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<Favorite[]>('/favorite');
+    const { data } = await api.get<Favorite[]>(ApiRouts.Favorites);
     dispatch(setFavoritesOffers(data));
-  },
+  }
 );
 
 export const fetchPostFavOffers = createAsyncThunk<void, Offer, {
@@ -109,26 +107,25 @@ export const fetchPostFavOffers = createAsyncThunk<void, Offer, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'postFavorites',
+  'fetchPostFavOffers',
   async ({ id, isFavorite }, { dispatch, extra: api, getState }) => {
     const status = isFavorite ? 0 : 1;
     if (getState().authorizationStatus === AuthStatuses.No_Auth) {
-      dispatch(redirectToRoute('/login'));
+      dispatch(redirectRoute(ApiRouts.Login));
       return;
     }
-    const { data } = await api.post<Offer>(`/favorite/${id}/${status}`);
+    const { data } = await api.post<Offer>(`${ApiRouts.Favorites}/${id}/${status}`);
 
     if (data.isFavorite) {
       dispatch(setFavoritesOffers([...getState().favorites, data]));
-    }
-    else {
+    } else {
       dispatch(setFavoritesOffers(getState().favorites.filter((offer) => offer.id !== data.id)));
     }
-    dispatch(setDataOffers(getState().offers.map((offer) => offer.id === data.id ? data : offer)));
+    dispatch(setOffers(getState().offers.map((offer) => offer.id === data.id ? data : offer)));
     if (getState().offer.id === data.id) {
-      dispatch(setDataHotel(data));
+      dispatch(setHotel(data));
     }
-  },
+  }
 );
 
 export const fetchPostCommentAction = createAsyncThunk<void, PostData, {
@@ -136,9 +133,9 @@ export const fetchPostCommentAction = createAsyncThunk<void, PostData, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'postComment',
+  'fetchPostCommentAction',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
-    const { data } = await api.post<Comment[]>(`comments/${id}`, { comment, rating });
-    dispatch(setDataComments(data.slice(0, 10)));
+    const { data } = await api.post<Comment>(`${ApiRouts.Comments}/${id}`, { comment, rating });
+    dispatch(setComment(data));
   }
 );

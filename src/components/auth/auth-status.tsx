@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { AuthStatuses } from '../../const';
+import { ApiRouts, AuthStatuses } from '../../const';
 import { useAppSelector } from '../../hooks';
 
 type PrivateRouteComponentProps = {
@@ -12,7 +12,7 @@ function IsAuthStatusComponent({ children }: PrivateRouteComponentProps) {
   return authStatus === AuthStatuses.Auth ? (
     children
   ) : (
-    <Navigate to={'/login'} />
+    <Navigate to={ApiRouts.Login} />
   );
 }
 

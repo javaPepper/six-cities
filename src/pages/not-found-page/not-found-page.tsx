@@ -4,7 +4,7 @@ function NotFoundPage() {
   return (
     <section>
       <h1>404. Page not found</h1>
-      <Link to="/six-cities">Вернуться на главную</Link>
+      <Link to='/six-cities'>Вернуться на главную</Link>
     </section>
   );
 }

@@ -1,8 +1,8 @@
-import { useRef, FormEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { loginAction } from "../../store/api-actions";
-import { AuthData } from "../../types/auth-data";
-import { Link } from "react-router-dom";
+import { useRef, FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { loginAction } from '../../store/api-actions';
+import { AuthData } from '../../types/auth-data';
+import { Link } from 'react-router-dom';
 
 function LoginComponent() {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -60,7 +60,7 @@ function LoginComponent() {
       </section>
       <section className='locations locations--login locations--current'>
         <div className='locations__item'>
-          <Link to={"/six-cities"} className='locations__item-link'>
+          <Link to={'/six-cities'} className='locations__item-link'>
             <span>{city}</span>
           </Link>
         </div>

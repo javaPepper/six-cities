@@ -4,7 +4,7 @@ import LoginHeaderComponent from '../../components/login/login-header-component'
 import { useAppSelector } from '../../hooks';
 
 function FavoritesPage() {
-  const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
   const favorites = useAppSelector((state) => state.favorites);
 
   return (
@@ -23,7 +23,7 @@ function FavoritesPage() {
                 />
               </Link>
             </div>
-            <LoginHeaderComponent authStatus={isAuthStatus} />
+            <LoginHeaderComponent authStatus={authStatus} />
           </div>
         </div>
       </header>

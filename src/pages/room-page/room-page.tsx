@@ -9,15 +9,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoginHeaderComponent from '../../components/login/login-header-component';
 import { fetchAllData, fetchPostFavOffers } from '../../store/api-actions';
 import {
-  setDataOffersLoadingStatus,
-  setFavoritesCity,
+  setOffersLoadingStatus,
+  setFavoritesCity
 } from '../../store/actions';
 import Spinner from '../spinner/spinner';
-import NotFoundPage from '../404/not-found-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import { AuthStatuses } from '../../const';
 import Header from '../../components/header/header';
 
-function RoomPage() {
+function RoomPage () {
   const { id } = useParams<{ id: string }>();
   const theOffer = useAppSelector((state) => state.offer);
   const isAuthStatus = useAppSelector((state) => state.authorizationStatus);
@@ -31,7 +31,7 @@ function RoomPage() {
 
   useEffect(() => {
     dispatch(fetchAllData(id as string));
-    dispatch(setDataOffersLoadingStatus(true));
+    dispatch(setOffersLoadingStatus(true));
   }, [dispatch, id]);
 
   if (!theOffer) {
@@ -158,11 +158,13 @@ function RoomPage() {
                   Reviews ·{' '}
                   <span className="reviews__amount">{comments.length}</span>
                 </h2>
-                {!isDataOffersLoading ? (
-                  <Spinner />
-                ) : (
-                  comments.length > 0 && <ReviewsList comments={comments} />
-                )}
+                {!isDataOffersLoading
+                  ? (
+                    <Spinner />
+                  )
+                  : (
+                    comments.length > 0 && <ReviewsList comments={comments} />
+                  )}
                 {isAuthStatus === AuthStatuses.Auth && <CommentForm />}
               </section>
             </div>
